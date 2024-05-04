@@ -1,0 +1,13 @@
+package com.g5.t1cleanarch;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class T1CleanArchApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(T1CleanArchApplication.class, args);
+	}
+
+}
