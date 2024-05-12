@@ -8,3 +8,9 @@ INSERT INTO clientes (nome, email) VALUES ('Cliente 7', 'cliente7@example.com');
 INSERT INTO clientes (nome, email) VALUES ('Cliente 8', 'cliente8@example.com');
 INSERT INTO clientes (nome, email) VALUES ('Cliente 9', 'cliente9@example.com');
 INSERT INTO clientes (nome, email) VALUES ('Cliente 10', 'cliente10@example.com');
+
+INSERT INTO aplicativos (nome, custoMensal) VALUES ('app 1', 10.0);
+INSERT INTO aplicativos (nome, custoMensal) VALUES ('app 2', 20.0);
+INSERT INTO aplicativos (nome, custoMensal) VALUES ('app 3', 40.0);
+INSERT INTO aplicativos (nome, custoMensal) VALUES ('app 4', 50.0);
+INSERT INTO aplicativos (nome, custoMensal) VALUES ('app 5', 99.99);

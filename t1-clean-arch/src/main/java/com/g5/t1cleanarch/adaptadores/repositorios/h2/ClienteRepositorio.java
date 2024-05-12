@@ -9,10 +9,10 @@ import com.g5.t1cleanarch.dominio.entidades.ClienteEntidade;
 import com.g5.t1cleanarch.dominio.repositorios.IClienteRepositorio;
 
 @Repository
-public class ClienteRepository implements IClienteRepositorio {
+public class ClienteRepositorio implements IClienteRepositorio {
     private JdbcTemplate jdbcTemplate;
 
-    public ClienteRepository(JdbcTemplate jdbcTemplate) {
+    public ClienteRepositorio(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
