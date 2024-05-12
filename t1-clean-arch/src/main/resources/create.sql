@@ -1,6 +1,6 @@
 DROP TABLE clientes IF EXISTS;
 CREATE TABLE clientes (
-    codigo IDENTITY NOT NULL PRIMARY KEY, 
+    codigo INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255),
-    email VARCHAR(255),
+    email VARCHAR(255)
 );
