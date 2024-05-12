@@ -1,4 +1,4 @@
-package com.g5.t1cleanarch.domain.entidades;
+package com.g5.t1cleanarch.dominio.entidades;
 
 public class AplicativoEntidade{
     private long codigo;

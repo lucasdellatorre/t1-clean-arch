@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-T1CleanArchApplication<t1-clean-arch>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.g5.t1cleanarch.T1CleanArchApplication",
+            "projectName": "t1-clean-arch",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
