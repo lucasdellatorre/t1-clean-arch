@@ -7,7 +7,6 @@ public class CriaAssinaturaRequisicaoDTO {
     public CriaAssinaturaRequisicaoDTO(long codigoCliente, long codigoAplicativo) {
         this.codigoCliente    = codigoCliente;
         this.codigoAplicativo = codigoAplicativo;
-
     }
 
     public long getCodigoCliente() {

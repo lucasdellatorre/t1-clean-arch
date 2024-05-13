@@ -34,4 +34,10 @@ public class AplicativoRepositorio implements IAplicativoRepositorio {
 
         return resp.isEmpty() ? null : resp.get(0);
     }
+
+    public AplicativoEntidade atualizaCustoMensal(long codigo, double custoMensal) {
+        int resp = this.jdbcTemplate.update("UPDATE aplicativos SET custo_mensal = "+custoMensal+" where codigo = "+codigo+"");
+
+        return resp == 0 ? null : this.getAplicativoPorCodigo(codigo);
+    }
 }

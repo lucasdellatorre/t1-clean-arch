@@ -23,17 +23,7 @@ public class AssinaturaRepositorio implements IAssinaturaRepositorio {
 
     public AssinaturaEntidade cadastra(ClienteEntidade cliente, AplicativoEntidade aplicativo) {
         LocalDate dataAtual = LocalDate.now();
-
         LocalDate dataAtualMais30Dias = dataAtual.plusDays(30);
-
-        // List<Object> splitUpNames = Arrays.asList(cliente.getCodigo(), aplicativo.getCodigo(), dataAtual, dataAtualMais30Dias)
-        //     .stream()
-        //     .collect(Collectors.toList());
-
-        // // SimpleJdbcInsert s = new SimpleJdbcInsert(jdbcTemplate).withTableName("assinatura");
-
-        // int codAssinatura = this.jdbcTemplate.update("INSERT INTO assinaturas(codigo_aplicativo, codigo_cliente, data_inicio, data_expiracao) values (?, ?, ?, ?)", splitUpNames);
-        
         Map<String, Object> parameters = new HashMap<>();
 
         parameters.put("codigo_aplicativo", aplicativo.getCodigo());

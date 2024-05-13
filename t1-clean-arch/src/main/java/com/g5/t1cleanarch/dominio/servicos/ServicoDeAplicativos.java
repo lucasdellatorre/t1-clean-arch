@@ -22,4 +22,8 @@ public class ServicoDeAplicativos {
     public AplicativoEntidade getAplicativoPorCodigo(long codigo) {
         return this.aplicativoRepositorio.getAplicativoPorCodigo(codigo);
     }
+
+    public AplicativoEntidade atualizaCustoMensal(long codigo, double custoMensal) {
+        return this.aplicativoRepositorio.atualizaCustoMensal(codigo, custoMensal);
+    }
 }
