@@ -6,4 +6,5 @@ import com.g5.t1cleanarch.dominio.entidades.AplicativoEntidade;
 
 public interface IAplicativoRepositorio {
     List<AplicativoEntidade> todos();
+    AplicativoEntidade getAplicativoPorCodigo(long codigo);
 }

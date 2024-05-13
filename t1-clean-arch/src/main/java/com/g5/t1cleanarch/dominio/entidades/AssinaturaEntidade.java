@@ -1,20 +1,20 @@
 package com.g5.t1cleanarch.dominio.entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class AssinaturaEntidade{
     private long codigo;
     private AplicativoEntidade aplicativo;
     private ClienteEntidade cliente;
-    private Date inicioVigencia;
-    private Date fimVigencia;
+    private LocalDate inicioVigencia;
+    private LocalDate fimVigencia;
 
-    public AssinaturaEntidade(long codigo, AplicativoEntidade aplicativo, ClienteEntidade cliente, Date inicioVigencia, Date fimVigencia) {
+    public AssinaturaEntidade(long codigo, AplicativoEntidade aplicativo, ClienteEntidade cliente, LocalDate dataAtual, LocalDate dataAtualMais30Dias) {
         this.codigo = codigo;
         this.aplicativo = aplicativo;
         this.cliente = cliente;
-        this.inicioVigencia = inicioVigencia;
-        this.fimVigencia = fimVigencia;
+        this.inicioVigencia = dataAtual;
+        this.fimVigencia = dataAtualMais30Dias;
     }
 
     public long getCodigo() {
@@ -29,11 +29,11 @@ public class AssinaturaEntidade{
         return cliente;
     }
 
-    public Date getInicioVigencia() {
+    public LocalDate getInicioVigencia() {
         return inicioVigencia;
     }
 
-    public Date getFimVigencia() {
+    public LocalDate getFimVigencia() {
         return fimVigencia;
     }
 
@@ -49,11 +49,11 @@ public class AssinaturaEntidade{
         this.cliente = cliente;
     }
 
-    public void setInicioVigencia(Date inicioVigencia) {
+    public void setInicioVigencia(LocalDate inicioVigencia) {
         this.inicioVigencia = inicioVigencia;
     }
 
-    public void setFimVigencia(Date fimVigencia) {
+    public void setFimVigencia(LocalDate fimVigencia) {
         this.fimVigencia = fimVigencia;
     }
 

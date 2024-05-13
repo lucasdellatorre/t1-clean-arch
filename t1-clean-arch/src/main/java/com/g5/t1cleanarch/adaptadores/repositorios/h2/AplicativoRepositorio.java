@@ -17,11 +17,21 @@ public class AplicativoRepositorio implements IAplicativoRepositorio {
     }
 
     public List<AplicativoEntidade> todos() {
-          List<AplicativoEntidade> aplicativos = this.jdbcTemplate.query("SELECT * from aplicativos",
+        List<AplicativoEntidade> aplicativos = this.jdbcTemplate.query("SELECT * from aplicativos",
             (rs, rowNum) -> new AplicativoEntidade(
                 rs.getInt("codigo"), 
                 rs.getString("nome"),
-                rs.getDouble("custoMensal")));
+                rs.getDouble("custo_mensal")));
         return aplicativos;
+    }
+
+    public AplicativoEntidade getAplicativoPorCodigo(long codigo) {
+        List<AplicativoEntidade> resp = this.jdbcTemplate.query("SELECT * from aplicativos where codigo=" + codigo, 
+            (rs, rowNum) -> new AplicativoEntidade(
+                rs.getInt("codigo"), 
+                rs.getString("nome"), 
+                rs.getDouble("custo_mensal")));
+
+        return resp.isEmpty() ? null : resp.get(0);
     }
 }

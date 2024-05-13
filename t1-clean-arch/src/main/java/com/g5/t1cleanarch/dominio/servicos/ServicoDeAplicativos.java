@@ -18,4 +18,8 @@ public class ServicoDeAplicativos {
     public List<AplicativoEntidade> todos() {
         return this.aplicativoRepositorio.todos();
     }
+
+    public AplicativoEntidade getAplicativoPorCodigo(long codigo) {
+        return this.aplicativoRepositorio.getAplicativoPorCodigo(codigo);
+    }
 }

@@ -18,4 +18,8 @@ public class ServicoDeClientes {
     public List<ClienteEntidade> listaClientes() {
         return clienteRepo.todos();
     }
+
+    public ClienteEntidade getClientePorCodigo(long codigo) {
+        return clienteRepo.getClientePorCodigo(codigo);
+    }
 }

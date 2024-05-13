@@ -24,4 +24,14 @@ public class ClienteRepositorio implements IClienteRepositorio {
                 rs.getString("email")));
         return clientes;
     }
+
+    public ClienteEntidade getClientePorCodigo(long codigo) {
+        List<ClienteEntidade> resp = this.jdbcTemplate.query("SELECT * from clientes where codigo=" + codigo, 
+            (rs, rowNum) -> new ClienteEntidade(
+                rs.getInt("codigo"), 
+                rs.getString("nome"), 
+                rs.getString("email")));
+
+        return resp.isEmpty() ? null : resp.get(0);
+    }
 }
