@@ -1,5 +1,7 @@
 package com.g5.t1cleanarch.dominio.servicos;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Service;
 
 import com.g5.t1cleanarch.dominio.entidades.AplicativoEntidade;
@@ -16,6 +18,8 @@ public class ServicoDeAssinatura {
     }
 
     public AssinaturaEntidade criaAssinatura(ClienteEntidade cliente, AplicativoEntidade aplicativo) {
-        return this.assinaturaRepositorio.cadastra(cliente, aplicativo);
+        LocalDate dataAtual = LocalDate.now();
+        LocalDate dataExpiracao = dataAtual.plusDays(7); //novas assinaturas ganham 7 dias gratis, conforme regras adicionais
+        return this.assinaturaRepositorio.cadastra(cliente, aplicativo, dataAtual, dataExpiracao);
     }
 }
