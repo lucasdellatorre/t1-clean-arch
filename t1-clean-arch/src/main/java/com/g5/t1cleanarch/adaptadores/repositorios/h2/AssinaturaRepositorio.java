@@ -21,15 +21,13 @@ public class AssinaturaRepositorio implements IAssinaturaRepositorio {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public AssinaturaEntidade cadastra(ClienteEntidade cliente, AplicativoEntidade aplicativo) {
-        LocalDate dataAtual = LocalDate.now();
-        LocalDate dataAtualMais30Dias = dataAtual.plusDays(30);
+    public AssinaturaEntidade cadastra(ClienteEntidade cliente, AplicativoEntidade aplicativo, LocalDate dataAtual, LocalDate dataExpiracao) {
         Map<String, Object> parameters = new HashMap<>();
 
         parameters.put("codigo_aplicativo", aplicativo.getCodigo());
         parameters.put("codigo_cliente", cliente.getCodigo());
         parameters.put("data_inicio", dataAtual);
-        parameters.put("data_expiracao", dataAtualMais30Dias);
+        parameters.put("data_expiracao", dataExpiracao);
 
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
             .withTableName("ASSINATURAS")
@@ -37,6 +35,6 @@ public class AssinaturaRepositorio implements IAssinaturaRepositorio {
 
         int codAssinatura = (int) simpleJdbcInsert.executeAndReturnKey(parameters);
 
-        return new AssinaturaEntidade(codAssinatura, aplicativo, cliente, dataAtual, dataAtualMais30Dias);
+        return new AssinaturaEntidade(codAssinatura, aplicativo, cliente, dataAtual, dataExpiracao);
     }
 }
