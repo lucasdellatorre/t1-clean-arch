@@ -33,7 +33,10 @@ public class AplicativoControlador {
     
     @PostMapping("servcad/aplicativos/atualizacusto/{idAplicativo}")
     @CrossOrigin(origins = "*")
-    public AplicativoDTO criaAssinatura(@PathVariable(value="idAplicativo") long idAplicativo, @RequestBody AtualizaCustoMensalRequisicaoDTO atualizaCustoMensalRequisicaoDTO) {
+    public AplicativoDTO atualizaCustoMensal(
+        @PathVariable(value="idAplicativo") long idAplicativo, 
+        @RequestBody AtualizaCustoMensalRequisicaoDTO atualizaCustoMensalRequisicaoDTO) {
+
         return atualizaCustoUC.run(idAplicativo, atualizaCustoMensalRequisicaoDTO);
     }
 }
