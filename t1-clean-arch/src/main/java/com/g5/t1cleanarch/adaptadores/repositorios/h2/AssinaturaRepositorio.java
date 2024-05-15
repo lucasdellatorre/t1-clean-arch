@@ -2,6 +2,7 @@ package com.g5.t1cleanarch.adaptadores.repositorios.h2;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -36,5 +37,12 @@ public class AssinaturaRepositorio implements IAssinaturaRepositorio {
         int codAssinatura = (int) simpleJdbcInsert.executeAndReturnKey(parameters);
 
         return new AssinaturaEntidade(codAssinatura, aplicativo, cliente, dataAtual, dataExpiracao);
+    }
+
+    public boolean verificarAssinaturaInvalida(long codigo, LocalDate dataAtual) {
+        int count = this.jdbcTemplate.queryForObject("SELECT COUNT(*) from assinaturas where codigo=" + codigo + " AND data_expiracao>='" + dataAtual + "'", 
+            Integer.class);
+
+        return count != 0;
     }
 }

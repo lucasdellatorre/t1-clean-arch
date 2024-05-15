@@ -22,4 +22,9 @@ public class ServicoDeAssinatura {
         LocalDate dataExpiracao = dataAtual.plusDays(7); //novas assinaturas ganham 7 dias gratis, conforme regras adicionais
         return this.assinaturaRepositorio.cadastra(cliente, aplicativo, dataAtual, dataExpiracao);
     }
+
+    public boolean verificarAssinaturaInvalida(long codigo) {
+        LocalDate dataAtual = LocalDate.now();
+        return this.assinaturaRepositorio.verificarAssinaturaInvalida(codigo, dataAtual);
+    }
 }
