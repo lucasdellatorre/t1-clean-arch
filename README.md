@@ -18,4 +18,4 @@ GET /servcad/assapp/:codapp
 
 POST /registrarpagamento
 
-GET /assinvalida/:codass
+GET /assinvalida/:codass - FEITO
