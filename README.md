@@ -10,7 +10,7 @@ POST /servcad/assinatura - FEITO
 
 POST /servcad/aplicativos/atualizacusto/:idAplicativ - FEITO
 
-GET /servcad/assinaturas/{tipo}
+GET /servcad/assinaturas/{tipo} - FEITO
 
 GET /servcad/asscli/:codcli
 
