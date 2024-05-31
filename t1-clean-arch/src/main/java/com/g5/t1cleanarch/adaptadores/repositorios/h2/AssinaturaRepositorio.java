@@ -45,4 +45,26 @@ public class AssinaturaRepositorio implements IAssinaturaRepositorio {
 
         return count != 0;
     }
+
+    public List<AssinaturaEntidade> getAssinaturasCliente(long codigo) {
+        List<AssinaturaEntidade> assinaturas = this.jdbcTemplate.query("SELECT * from assinaturas where codigo_cliente = " + codigo,
+            (rs, rowNum) -> {
+
+                long codigoCliente = rs.getLong("codigo_cliente");
+                long codigoAplicativo = rs.getLong("codigo_aplicativo");
+
+                ClienteEntidade cliente = new ClienteEntidade(codigoCliente, null, null);
+                AplicativoEntidade aplicativo = new AplicativoEntidade(codigoAplicativo, null, codigo);
+
+                AssinaturaEntidade assinatura = new AssinaturaEntidade(
+                    rs.getLong("codigo"),
+                    aplicativo,
+                    cliente,
+                    rs.getDate("data_inicio").toLocalDate(),
+                    rs.getDate("data_expiracao").toLocalDate());
+
+                return assinatura;
+        });
+        return assinaturas;
+    }
 }
