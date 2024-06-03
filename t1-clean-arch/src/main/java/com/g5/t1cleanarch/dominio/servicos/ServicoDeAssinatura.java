@@ -1,6 +1,7 @@
 package com.g5.t1cleanarch.dominio.servicos;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,9 @@ public class ServicoDeAssinatura {
     public boolean verificarAssinaturaInvalida(long codigo) {
         LocalDate dataAtual = LocalDate.now();
         return this.assinaturaRepositorio.verificarAssinaturaInvalida(codigo, dataAtual);
+    }
+
+    public List<AssinaturaEntidade> getAssinaturasCliente(long codigo) {
+        return this.assinaturaRepositorio.getAssinaturasCliente(codigo);
     }
 }
