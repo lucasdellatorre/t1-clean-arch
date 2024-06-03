@@ -14,7 +14,7 @@ GET /servcad/assinaturas/{tipo}
 
 GET /servcad/asscli/:codcli - FEITO
 
-GET /servcad/assapp/:codapp
+GET /servcad/assapp/:codapp - FEITO
 
 POST /registrarpagamento
 

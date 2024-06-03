@@ -11,4 +11,5 @@ public interface IAssinaturaRepositorio {
     AssinaturaEntidade cadastra(ClienteEntidade cliente, AplicativoEntidade aplicativo, LocalDate dataAtual, LocalDate dataExpiracao);
     boolean verificarAssinaturaInvalida(long codigo, LocalDate dataAtual);
     List<AssinaturaEntidade> getAssinaturasCliente(long codigo);
+    List<AssinaturaEntidade> getAssinaturasAplicativo(long codigo);
 }

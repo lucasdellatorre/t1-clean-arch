@@ -54,7 +54,29 @@ public class AssinaturaRepositorio implements IAssinaturaRepositorio {
                 long codigoAplicativo = rs.getLong("codigo_aplicativo");
 
                 ClienteEntidade cliente = new ClienteEntidade(codigoCliente, null, null);
-                AplicativoEntidade aplicativo = new AplicativoEntidade(codigoAplicativo, null, codigo);
+                AplicativoEntidade aplicativo = new AplicativoEntidade(codigoAplicativo, null, 0);
+
+                AssinaturaEntidade assinatura = new AssinaturaEntidade(
+                    rs.getLong("codigo"),
+                    aplicativo,
+                    cliente,
+                    rs.getDate("data_inicio").toLocalDate(),
+                    rs.getDate("data_expiracao").toLocalDate());
+
+                return assinatura;
+        });
+        return assinaturas;
+    }
+
+    public List<AssinaturaEntidade> getAssinaturasAplicativo(long codigo) {
+        List<AssinaturaEntidade> assinaturas = this.jdbcTemplate.query("SELECT * from assinaturas where codigo_aplicativo = " + codigo,
+            (rs, rowNum) -> {
+
+                long codigoCliente = rs.getLong("codigo_cliente");
+                long codigoAplicativo = rs.getLong("codigo_aplicativo");
+
+                ClienteEntidade cliente = new ClienteEntidade(codigoCliente, null, null);
+                AplicativoEntidade aplicativo = new AplicativoEntidade(codigoAplicativo, null, 0);
 
                 AssinaturaEntidade assinatura = new AssinaturaEntidade(
                     rs.getLong("codigo"),
