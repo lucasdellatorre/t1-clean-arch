@@ -14,7 +14,7 @@ import com.g5.t1cleanarch.dominio.repositorios.IClienteRepositorio;
 @Repository
 @Primary
 public class ClienteRepositorioJPA implements IClienteRepositorio {
-    ClienteJPA_ItfRep clienteRepositorio;
+    private ClienteJPA_ItfRep clienteRepositorio;
 
     public ClienteRepositorioJPA (ClienteJPA_ItfRep clienteRepositorio) {
         this.clienteRepositorio = clienteRepositorio;
