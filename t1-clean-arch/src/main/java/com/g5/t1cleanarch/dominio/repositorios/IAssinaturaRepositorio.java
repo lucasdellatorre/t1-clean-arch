@@ -12,4 +12,5 @@ public interface IAssinaturaRepositorio {
     List<AssinaturaEntidade> listarAssinaturasPorTipo(String tipo);
     AssinaturaEntidade getAssinaturaById(long codigo);
     List<AssinaturaEntidade> getAssinaturasCliente(long codigo);
+    AssinaturaEntidade atualizaAssinatura(AssinaturaEntidade assinatura);
 }

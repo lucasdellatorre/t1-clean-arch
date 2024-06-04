@@ -16,6 +16,6 @@ GET /servcad/asscli/:codcli - FEITO
 
 GET /servcad/assapp/:codapp
 
-POST /registrarpagamento
+POST /registrarpagamento - FEITO
 
 GET /assinvalida/:codass - FEITO

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.g5.t1cleanarch.adaptadores.repositorios.Assinatura;
 import com.g5.t1cleanarch.dominio.entidades.AplicativoEntidade;
 import com.g5.t1cleanarch.dominio.entidades.ClienteEntidade;
 import com.g5.t1cleanarch.dominio.entidades.AssinaturaEntidade;
@@ -38,7 +40,15 @@ public class ServicoDeAssinatura {
         return dataExpiracao.isEqual(dataAtual) || dataExpiracao.isAfter(dataAtual);
     }
 
+    public boolean verificaValorAssinaturaValida(AssinaturaEntidade assinatura, double valorPago) {
+        return assinatura.getAplicativo().getCustoMensal() == valorPago;
+    }
+
     public List<AssinaturaEntidade> getAssinaturasCliente(long codigo) {
         return this.assinaturaRepositorio.getAssinaturasCliente(codigo);
+    }
+
+    public AssinaturaEntidade atualizaAssinatura(AssinaturaEntidade assinatura) {
+        return this.assinaturaRepositorio.atualizaAssinatura(assinatura);
     }
 }
