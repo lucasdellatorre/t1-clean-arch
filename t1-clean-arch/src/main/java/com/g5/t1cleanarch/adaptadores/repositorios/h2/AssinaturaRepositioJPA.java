@@ -19,7 +19,7 @@ import com.g5.t1cleanarch.dominio.repositorios.IAssinaturaRepositorio;
 @Repository
 @Primary
 public class AssinaturaRepositioJPA implements IAssinaturaRepositorio {
-    AssinaturaJPA_ItfRep assinaturaRepositorio;
+    private AssinaturaJPA_ItfRep assinaturaRepositorio;
 
     public AssinaturaRepositioJPA(AssinaturaJPA_ItfRep assinaturaRepositorio) {
         this.assinaturaRepositorio = assinaturaRepositorio;
@@ -63,5 +63,11 @@ public class AssinaturaRepositioJPA implements IAssinaturaRepositorio {
     public AssinaturaEntidade getAssinaturaById(long codigo) {
         Assinatura assinatura = assinaturaRepositorio.findById(codigo);
         return assinatura == null ? null : Assinatura.toAssinaturaEntidade(assinatura);
+    }
+
+    @Override
+    public AssinaturaEntidade atualizaAssinatura(AssinaturaEntidade assinaturaEntidade) {
+        Assinatura assinatura = assinaturaRepositorio.save(Assinatura.fromAssinaturaEntidade(assinaturaEntidade));
+        return Assinatura.toAssinaturaEntidade(assinatura);
     }
 }

@@ -1,15 +1,15 @@
 package com.g5.t1cleanarch.dominio.entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PagamentoEntidade{
     private long codigo;
     private AssinaturaEntidade assinatura;
     private double valorPago;
-    private Date dataPagamento;
+    private LocalDate dataPagamento;
     private String promocao;
 
-    public PagamentoEntidade(long codigo, AssinaturaEntidade assinatura, double valorPago, Date dataPagamento, String promocao) {
+    public PagamentoEntidade(long codigo, AssinaturaEntidade assinatura, double valorPago, LocalDate dataPagamento, String promocao) {
         this.codigo = codigo;
         this.assinatura = assinatura;
         this.valorPago = valorPago;
@@ -29,7 +29,7 @@ public class PagamentoEntidade{
         return valorPago;
     }
 
-    public Date getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
@@ -49,7 +49,7 @@ public class PagamentoEntidade{
         this.valorPago = valorPago;
     }
 
-    public void setDataPagamento(Date dataPagamento) {
+    public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 
