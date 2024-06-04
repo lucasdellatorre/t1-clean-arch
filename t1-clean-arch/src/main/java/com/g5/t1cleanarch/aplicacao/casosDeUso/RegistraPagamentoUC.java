@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import com.g5.t1cleanarch.aplicacao.dtos.RegistraPagamentoDTO;
 import com.g5.t1cleanarch.aplicacao.dtos.RegistraPagamentoRequisicaoDTO;
 import com.g5.t1cleanarch.dominio.entidades.AssinaturaEntidade;
-import com.g5.t1cleanarch.dominio.entidades.PagamentoEntidade;
 import com.g5.t1cleanarch.dominio.enums.StatusPagamento;
 import com.g5.t1cleanarch.dominio.servicos.ServicoDeAssinatura;
 import com.g5.t1cleanarch.dominio.servicos.ServicoDePagamentos;

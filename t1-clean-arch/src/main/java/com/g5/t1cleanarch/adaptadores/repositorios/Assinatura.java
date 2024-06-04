@@ -2,23 +2,34 @@ package com.g5.t1cleanarch.adaptadores.repositorios;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import com.g5.t1cleanarch.dominio.entidades.AssinaturaEntidade;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Assinatura {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(generator = "sequence-generator")
+    @GenericGenerator(
+      name = "sequence-generator",
+      strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+      parameters = {
+        @Parameter(name = "sequence_name", value = "assinatura_sequence"),
+        @Parameter(name = "initial_value", value = "6"),
+        @Parameter(name = "increment_size", value = "1")
+        }
+    )
     private long codigo;
-    @OneToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private Aplicativo aplicativo;
-    @OneToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private Cliente cliente;
     private LocalDate inicioVigencia;
     private LocalDate fimVigencia;
@@ -87,6 +98,7 @@ public class Assinatura {
 
     public static Assinatura fromAssinaturaEntidade(AssinaturaEntidade aEntidade) {
         return new Assinatura(
+                aEntidade.getCodigo(),
                 Aplicativo.fromAplicativoEntidade(aEntidade.getAplicativo()), 
                 Cliente.fromClienteEntidade(aEntidade.getCliente()), 
                 aEntidade.getInicioVigencia(), 

@@ -1,13 +1,27 @@
 package com.g5.t1cleanarch.adaptadores.repositorios;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import com.g5.t1cleanarch.dominio.entidades.AplicativoEntidade;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
 public class Aplicativo {
     @Id
+    @GeneratedValue(generator = "sequence-generator")
+    @GenericGenerator(
+      name = "sequence-generator",
+      strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+      parameters = {
+        @Parameter(name = "sequence_name", value = "aplicativo_sequence"),
+        @Parameter(name = "initial_value", value = "6"),
+        @Parameter(name = "increment_size", value = "1")
+        }
+    )
     private long codigo;
     private String nome;
     private double custoMensal;
