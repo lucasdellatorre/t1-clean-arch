@@ -9,6 +9,5 @@ import com.g5.t1cleanarch.dominio.entidades.ClienteEntidade;
 
 public interface IAssinaturaRepositorio {
     AssinaturaEntidade cadastra(ClienteEntidade cliente, AplicativoEntidade aplicativo, LocalDate dataAtual, LocalDate dataExpiracao);
-    boolean verificarAssinaturaInvalida(long codigo, LocalDate dataAtual);
     List<AssinaturaEntidade> getAssinaturasCliente(long codigo);
 }

@@ -14,7 +14,7 @@ import com.g5.t1cleanarch.dominio.servicos.ServicoDeAssinatura;
 public class ListaAssinaturasClienteUC {
     private ServicoDeAssinatura servicoDeAssinatura;
 
-    public ListaAssinaturasClienteUC(ServicoDeAssinatura servicoDeAssinatura, AssinaturaInvalidaUC assinaturaInvalidaUC) {
+    public ListaAssinaturasClienteUC(ServicoDeAssinatura servicoDeAssinatura) {
         this.servicoDeAssinatura = servicoDeAssinatura;
     }
 
@@ -22,8 +22,8 @@ public class ListaAssinaturasClienteUC {
         List<AssinaturaEntidade> assinaturas = servicoDeAssinatura.getAssinaturasCliente(codigo);
         List<AssinaturaStatusDTO> assinaturasDTO = new ArrayList<>();
 
-        for (AssinaturaEntidade a: assinaturas) {
-            boolean valida = servicoDeAssinatura.verificarAssinaturaInvalida(a.getCodigo());
+        for (AssinaturaEntidade assinatura : assinaturas) {
+            boolean valida = servicoDeAssinatura.verificarAssinaturaInvalida(assinatura);
             Status status;
 
             if (valida) {
@@ -32,12 +32,13 @@ public class ListaAssinaturasClienteUC {
             else {
                 status = Status.CANCELADA;
             }
+
             AssinaturaStatusDTO aDTO = new AssinaturaStatusDTO(
-                a.getCodigo(),
-                a.getAplicativo(),
-                a.getCliente(),
-                a.getInicioVigencia(),
-                a.getFimVigencia(),
+                assinatura.getCodigo(),
+                assinatura.getAplicativo(),
+                assinatura.getCliente(),
+                assinatura.getInicioVigencia(),
+                assinatura.getFimVigencia(),
                 status);
 
             assinaturasDTO.add(aDTO);

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.g5.t1cleanarch.aplicacao.casosDeUso.AssinaturaInvalidaUC;
 import com.g5.t1cleanarch.aplicacao.casosDeUso.CriaAssinaturaUC;
 import com.g5.t1cleanarch.aplicacao.casosDeUso.ListaAssinaturasClienteUC;
 import com.g5.t1cleanarch.aplicacao.dtos.AssinaturaDTO;
@@ -19,13 +18,13 @@ import com.g5.t1cleanarch.aplicacao.dtos.CriaAssinaturaRequisicaoDTO;
 @RestController
 public class AssinaturaControlador {
     private CriaAssinaturaUC criaAssinatura;
-    private AssinaturaInvalidaUC assinaturaInvalida;
+    // private AssinaturaInvalidaUC assinaturaInvalida;
     private ListaAssinaturasClienteUC listaAssinaturasCliente;
 
-    public AssinaturaControlador(CriaAssinaturaUC criaAssinaturaUC, AssinaturaInvalidaUC assinaturaInvalidaUC, ListaAssinaturasClienteUC listaAssinaturasClienteUC) {
+    public AssinaturaControlador(CriaAssinaturaUC criaAssinaturaUC, ListaAssinaturasClienteUC listaAssinaturasCliente) {
         this.criaAssinatura = criaAssinaturaUC;
-        this.assinaturaInvalida = assinaturaInvalidaUC;
-        this.listaAssinaturasCliente = listaAssinaturasClienteUC;
+        // this.assinaturaInvalida = assinaturaInvalidaUC;
+        this.listaAssinaturasCliente = listaAssinaturasCliente;
     }
 
     @PostMapping("servcad/assinaturas")
@@ -34,15 +33,21 @@ public class AssinaturaControlador {
         return criaAssinatura.run(assinatura);
     }
 
-    @GetMapping("assinvalida/{codass}")
-    @CrossOrigin(origins = "*")
-    public boolean verificaAssinaturaValida(@PathVariable(value="codass") long codass) {
-        return assinaturaInvalida.run(codass);
-    }
-
     @GetMapping("servcad/asscli/{codcli}")
     @CrossOrigin(origins = "*")
     public List<AssinaturaStatusDTO> listaAssinaturasCliente(@PathVariable(value="codcli") long codcli) {
         return listaAssinaturasCliente.run(codcli);
     }
+
+    // @GetMapping("servcad/assinaturas")
+    // @CrossOrigin(origins = "*")
+    // public List<AssinaturaStatusDTO> listaAssinaturas() {
+    //     return listaAssinaturasCliente.run(codcli);
+    // }
+
+    // @GetMapping("assinvalida/{codass}")
+    // @CrossOrigin(origins = "*")
+    // public boolean verificaAssinaturaValida(@PathVariable(value="codass") long codass) {
+    //     return assinaturaInvalida.run(codass);
+    // }
 }

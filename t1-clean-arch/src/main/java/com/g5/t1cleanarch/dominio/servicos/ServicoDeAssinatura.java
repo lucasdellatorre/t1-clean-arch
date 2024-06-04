@@ -24,9 +24,11 @@ public class ServicoDeAssinatura {
         return this.assinaturaRepositorio.cadastra(cliente, aplicativo, dataAtual, dataExpiracao);
     }
 
-    public boolean verificarAssinaturaInvalida(long codigo) {
+    public boolean verificarAssinaturaInvalida(AssinaturaEntidade assinatura) {
         LocalDate dataAtual = LocalDate.now();
-        return this.assinaturaRepositorio.verificarAssinaturaInvalida(codigo, dataAtual);
+        LocalDate dataExpiracao = assinatura.getFimVigencia();
+
+        return dataExpiracao.isEqual(dataAtual) || dataExpiracao.isAfter(dataAtual);
     }
 
     public List<AssinaturaEntidade> getAssinaturasCliente(long codigo) {

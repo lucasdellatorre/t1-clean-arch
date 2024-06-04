@@ -1,0 +1,104 @@
+package com.g5.t1cleanarch.adaptadores.repositorios;
+
+import java.time.LocalDate;
+
+import com.g5.t1cleanarch.dominio.entidades.AssinaturaEntidade;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+
+@Entity
+public class Assinatura {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long codigo;
+    @OneToOne(cascade = CascadeType.REFRESH)
+    private Aplicativo aplicativo;
+    @OneToOne(cascade = CascadeType.REFRESH)
+    private Cliente cliente;
+    private LocalDate inicioVigencia;
+    private LocalDate fimVigencia;
+
+    protected Assinatura() {}
+
+    public Assinatura(Aplicativo aplicativo, Cliente cliente, LocalDate dataAtual, LocalDate dataAtualMais30Dias) {
+        this.aplicativo = aplicativo;
+        this.cliente = cliente;
+        this.inicioVigencia = dataAtual;
+        this.fimVigencia = dataAtualMais30Dias;
+    }
+
+    public Assinatura(long codigo, Aplicativo aplicativo, Cliente cliente, LocalDate dataAtual, LocalDate dataAtualMais30Dias) {
+        this.codigo = codigo;
+        this.aplicativo = aplicativo;
+        this.cliente = cliente;
+        this.inicioVigencia = dataAtual;
+        this.fimVigencia = dataAtualMais30Dias;
+    }
+
+    public long getCodigo() {
+        return codigo;
+    }
+
+    public Aplicativo getAplicativo() {
+        return aplicativo;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public LocalDate getInicioVigencia() {
+        return inicioVigencia;
+    }
+
+    public LocalDate getFimVigencia() {
+        return fimVigencia;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setAplicativo(Aplicativo aplicativo) {
+        this.aplicativo = aplicativo;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setInicioVigencia(LocalDate inicioVigencia) {
+        this.inicioVigencia = inicioVigencia;
+    }
+
+    public void setFimVigencia(LocalDate fimVigencia) {
+        this.fimVigencia = fimVigencia;
+    }
+
+    @Override
+    public String toString() {
+        return "Assinatura [codigo=" + codigo + ", aplicativo=" + aplicativo + ", cliente=" + cliente + ", inicioVigencia=" + inicioVigencia +  ", fimVigencia=" + fimVigencia + "]";
+    }
+
+    public static Assinatura fromAssinaturaEntidade(AssinaturaEntidade aEntidade) {
+        return new Assinatura(
+                Aplicativo.fromAplicativoEntidade(aEntidade.getAplicativo()), 
+                Cliente.fromClienteEntidade(aEntidade.getCliente()), 
+                aEntidade.getInicioVigencia(), 
+                aEntidade.getFimVigencia());
+    }
+
+    public static AssinaturaEntidade toAssinaturaEntidade(Assinatura assinatura) {
+        return new AssinaturaEntidade(
+            assinatura.getCodigo(), 
+            Aplicativo.toAplicativoEntidade(assinatura.getAplicativo()), 
+            Cliente.toClienteEntidade(assinatura.getCliente()), 
+            assinatura.getInicioVigencia(), 
+            assinatura.getFimVigencia());
+    }
+}
