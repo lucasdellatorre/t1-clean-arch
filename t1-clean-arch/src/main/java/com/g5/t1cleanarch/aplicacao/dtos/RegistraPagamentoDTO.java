@@ -2,7 +2,6 @@ package com.g5.t1cleanarch.aplicacao.dtos;
 
 import java.time.LocalDate;
 
-import com.g5.t1cleanarch.dominio.entidades.PagamentoEntidade;
 import com.g5.t1cleanarch.dominio.enums.StatusPagamento;
 
 public class RegistraPagamentoDTO {

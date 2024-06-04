@@ -29,6 +29,8 @@ public class AssinaturaRepositioJPA implements IAssinaturaRepositorio {
     public AssinaturaEntidade cadastra(ClienteEntidade cliente, AplicativoEntidade aplicativo, LocalDate dataAtual, LocalDate dataExpiracao) {
         Assinatura assinatura = new Assinatura(Aplicativo.fromAplicativoEntidade(aplicativo), Cliente.fromClienteEntidade(cliente), dataAtual, dataExpiracao);
 
+        System.out.println(assinatura);
+
         this.assinaturaRepositorio.save(assinatura);
 
         return Assinatura.toAssinaturaEntidade(assinatura);
