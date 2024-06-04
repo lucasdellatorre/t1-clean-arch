@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.g5.t1cleanarch.adaptadores.repositorios.Assinatura;
 import com.g5.t1cleanarch.dominio.entidades.AplicativoEntidade;
 import com.g5.t1cleanarch.dominio.entidades.ClienteEntidade;
 import com.g5.t1cleanarch.dominio.entidades.AssinaturaEntidade;

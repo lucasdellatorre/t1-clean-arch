@@ -1,4 +1,4 @@
-package com.g5.t1cleanarch.adaptadores.repositorios;
+package com.g5.t1cleanarch.adaptadores.repositorios.entidades;
 
 import java.time.LocalDate;
 

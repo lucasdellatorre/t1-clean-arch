@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import com.g5.t1cleanarch.adaptadores.repositorios.Cliente;
 import com.g5.t1cleanarch.adaptadores.repositorios.ClienteJPA_ItfRep;
+import com.g5.t1cleanarch.adaptadores.repositorios.entidades.Cliente;
 import com.g5.t1cleanarch.dominio.entidades.ClienteEntidade;
 import com.g5.t1cleanarch.dominio.repositorios.IClienteRepositorio;
 
