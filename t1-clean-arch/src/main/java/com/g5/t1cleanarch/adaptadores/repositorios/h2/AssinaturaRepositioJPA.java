@@ -58,4 +58,10 @@ public class AssinaturaRepositioJPA implements IAssinaturaRepositorio {
             .map(assinatura -> Assinatura.toAssinaturaEntidade(assinatura))
             .toList();
     }
+
+    @Override
+    public AssinaturaEntidade getAssinaturaById(long codigo) {
+        Assinatura assinatura = assinaturaRepositorio.findById(codigo);
+        return assinatura == null ? null : Assinatura.toAssinaturaEntidade(assinatura);
+    }
 }
