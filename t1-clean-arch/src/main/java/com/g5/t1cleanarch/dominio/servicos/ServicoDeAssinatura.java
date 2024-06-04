@@ -24,9 +24,9 @@ public class ServicoDeAssinatura {
     }
 
     public List<AssinaturaEntidade> listarAssinaturasPorTipo(String tipo) {
-        return assinaturaRepositorio.listarAssinaturasPorTipo(tipo);
+        return this.assinaturaRepositorio.listarAssinaturasPorTipo(tipo);
     }
-    
+
     public AssinaturaEntidade getAssinaturaById(long codigo) {
         return this.assinaturaRepositorio.getAssinaturaById(codigo);
     }

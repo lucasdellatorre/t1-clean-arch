@@ -1,4 +1,4 @@
-// package com.g5.t1cleanarch.adaptadores.repositorios.h2;
+package com.g5.t1cleanarch.adaptadores.repositorios.h2;
 
 import java.time.LocalDate;
 import java.util.HashMap;

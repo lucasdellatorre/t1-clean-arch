@@ -9,25 +9,15 @@ INSERT INTO cliente (codigo, nome, email) VALUES (8, 'Cliente 8', 'cliente8@exam
 INSERT INTO cliente (codigo, nome, email) VALUES (9, 'Cliente 9', 'cliente9@example.com');
 INSERT INTO cliente (codigo, nome, email) VALUES (10, 'Cliente 10', 'cliente10@example.com');
 
-INSERT INTO aplicativos (nome, custo_mensal) VALUES ('app 1', 10.0);
-INSERT INTO aplicativos (nome, custo_mensal) VALUES ('app 2', 20.0);
-INSERT INTO aplicativos (nome, custo_mensal) VALUES ('app 3', 40.0);
-INSERT INTO aplicativos (nome, custo_mensal) VALUES ('app 4', 50.0);
-INSERT INTO aplicativos (nome, custo_mensal) VALUES ('app 5', 99.99);
-
-INSERT INTO assinaturas (codigo_aplicativo, codigo_cliente, data_inicio, data_expiracao)
-VALUES
-    ((SELECT codigo FROM aplicativos WHERE nome = 'app 1'), (SELECT codigo FROM clientes WHERE nome = 'Cliente 1'), '2023-05-01', '2025-06-01'),
-    ((SELECT codigo FROM aplicativos WHERE nome = 'app 1'), (SELECT codigo FROM clientes WHERE nome = 'Cliente 2'), '2023-05-01', '2025-06-01'),
-    ((SELECT codigo FROM aplicativos WHERE nome = 'app 1'), (SELECT codigo FROM clientes WHERE nome = 'Cliente 3'), '2023-05-01', '2023-06-01');
-
-INSERT INTO assinaturas (codigo_aplicativo, codigo_cliente, data_inicio, data_expiracao)
-VALUES
-    ((SELECT codigo FROM aplicativos WHERE nome = 'app 2'), (SELECT codigo FROM clientes WHERE nome = 'Cliente 4'), '2023-05-01', '2023-06-01'),
-    ((SELECT codigo FROM aplicativos WHERE nome = 'app 2'), (SELECT codigo FROM clientes WHERE nome = 'Cliente 5'), '2023-05-01', '2023-06-01'),
-    ((SELECT codigo FROM aplicativos WHERE nome = 'app 2'), (SELECT codigo FROM clientes WHERE nome = 'Cliente 6'), '2023-05-01', '2025-06-01');
 INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (1, 'app 1', 10.0);
 INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (2, 'app 2', 20.0);
 INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (3, 'app 3', 40.0);
 INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (4, 'app 4', 50.0);
 INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (5, 'app 5', 99.99);
+
+INSERT INTO assinatura (fim_vigencia, inicio_vigencia, aplicativo_codigo, cliente_codigo, codigo) VALUES ('2024-06-04', '2024-07-04', 1, 1, 1);
+INSERT INTO assinatura (fim_vigencia, inicio_vigencia, aplicativo_codigo, cliente_codigo, codigo) VALUES ('2024-06-04', '2024-07-04', 2, 2, 2);
+INSERT INTO assinatura (fim_vigencia, inicio_vigencia, aplicativo_codigo, cliente_codigo, codigo) VALUES ('2024-06-04', '2024-07-04', 3, 3, 3);
+
+INSERT INTO assinatura (fim_vigencia, inicio_vigencia, aplicativo_codigo, cliente_codigo, codigo) VALUES ('2024-06-02', '2024-07-04', 4, 4, 4);
+INSERT INTO assinatura (fim_vigencia, inicio_vigencia, aplicativo_codigo, cliente_codigo, codigo) VALUES ('2024-06-02', '2024-07-04', 5, 5, 5);
