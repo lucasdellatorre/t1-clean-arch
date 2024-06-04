@@ -1,4 +1,4 @@
-package com.g5.t1cleanarch.adaptadores.repositorios.h2;
+// package com.g5.t1cleanarch.adaptadores.repositorios.h2;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -9,74 +9,71 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+// import java.time.LocalDate;
+// import java.util.HashMap;
+// import java.util.List;
+// import java.util.Map;
 
-import com.g5.t1cleanarch.dominio.entidades.ClienteEntidade;
-import com.g5.t1cleanarch.dominio.entidades.AplicativoEntidade;
-import com.g5.t1cleanarch.dominio.entidades.AssinaturaEntidade;
-import com.g5.t1cleanarch.dominio.repositorios.IAssinaturaRepositorio;
+// import org.springframework.jdbc.core.JdbcTemplate;
+// import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+// import org.springframework.stereotype.Repository;
 
-@Repository
-public class AssinaturaRepositorio implements IAssinaturaRepositorio {
-    private JdbcTemplate jdbcTemplate;
+// import com.g5.t1cleanarch.dominio.entidades.ClienteEntidade;
+// import com.g5.t1cleanarch.dominio.entidades.AplicativoEntidade;
+// import com.g5.t1cleanarch.dominio.entidades.AssinaturaEntidade;
+// import com.g5.t1cleanarch.dominio.repositorios.IAssinaturaRepositorio;
 
-    public AssinaturaRepositorio(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+// @Repository
+// public class AssinaturaRepositorio implements IAssinaturaRepositorio {
+//     private JdbcTemplate jdbcTemplate;
 
-    public AssinaturaEntidade cadastra(ClienteEntidade cliente, AplicativoEntidade aplicativo, LocalDate dataAtual, LocalDate dataExpiracao) {
-        Map<String, Object> parameters = new HashMap<>();
+//     public AssinaturaRepositorio(JdbcTemplate jdbcTemplate) {
+//         this.jdbcTemplate = jdbcTemplate;
+//     }
 
-        parameters.put("codigo_aplicativo", aplicativo.getCodigo());
-        parameters.put("codigo_cliente", cliente.getCodigo());
-        parameters.put("data_inicio", dataAtual);
-        parameters.put("data_expiracao", dataExpiracao);
+//     public AssinaturaEntidade cadastra(ClienteEntidade cliente, AplicativoEntidade aplicativo, LocalDate dataAtual, LocalDate dataExpiracao) {
+//         Map<String, Object> parameters = new HashMap<>();
 
-        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
-            .withTableName("ASSINATURAS")
-            .usingGeneratedKeyColumns("CODIGO");
+//         parameters.put("codigo_aplicativo", aplicativo.getCodigo());
+//         parameters.put("codigo_cliente", cliente.getCodigo());
+//         parameters.put("data_inicio", dataAtual);
+//         parameters.put("data_expiracao", dataExpiracao);
 
-        int codAssinatura = (int) simpleJdbcInsert.executeAndReturnKey(parameters);
+//         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
+//             .withTableName("ASSINATURAS")
+//             .usingGeneratedKeyColumns("CODIGO");
 
-        return new AssinaturaEntidade(codAssinatura, aplicativo, cliente, dataAtual, dataExpiracao);
-    }
+//         int codAssinatura = (int) simpleJdbcInsert.executeAndReturnKey(parameters);
 
-    public List<AssinaturaEntidade> listarAssinaturasPorTipo(String tipo) {
-        String query;
-        LocalDate hoje = LocalDate.now();
-        RowMapper<AssinaturaEntidade> rowMapper = (rs, rowNum) -> {
+//         return new AssinaturaEntidade(codAssinatura, aplicativo, cliente, dataAtual, dataExpiracao);
+//     }
 
-            AplicativoEntidade aplicativo = new AplicativoEntidade(
-                rs.getLong("codigo_aplicativo"),
-                null,
-                0
-            );
-    
-            ClienteEntidade cliente = new ClienteEntidade(
-                rs.getLong("codigo_cliente"),
-                null,
-                null
-            );
+//     public boolean verificarAssinaturaInvalida(long codigo, LocalDate dataAtual) {
+//         int count = this.jdbcTemplate.queryForObject("SELECT COUNT(*) from assinaturas where codigo=" + codigo + " AND data_expiracao>='" + dataAtual + "'", 
+//             Integer.class);
 
-            return new AssinaturaEntidade(
-                rs.getLong("codigo"),
-                aplicativo,
-                cliente,
-                rs.getDate("data_inicio").toLocalDate(),
-                rs.getDate("data_expiracao").toLocalDate()
-            );
-        };
-        
-        switch (tipo.toUpperCase()) {
-            case "ATIVAS":
-                query = "SELECT * FROM assinaturas WHERE data_expiracao > ?";
-                return jdbcTemplate.query(query, rowMapper, hoje);
-            case "CANCELADAS":
-                query = "SELECT * FROM assinaturas WHERE data_expiracao <= ?";
-                return jdbcTemplate.query(query, rowMapper, hoje);
-            case "TODAS":
-            default:
-                query = "SELECT * FROM assinaturas";
-                return jdbcTemplate.query(query, rowMapper);
-        }
-    }
-}
+//         return count != 0;
+//     }
+
+//     public List<AssinaturaEntidade> getAssinaturasCliente(long codigo) {
+//         List<AssinaturaEntidade> assinaturas = this.jdbcTemplate.query("SELECT * from assinaturas where codigo_cliente = " + codigo,
+//             (rs, rowNum) -> {
+
+//                 long codigoCliente = rs.getLong("codigo_cliente");
+//                 long codigoAplicativo = rs.getLong("codigo_aplicativo");
+
+//                 ClienteEntidade cliente = new ClienteEntidade(codigoCliente, null, null);
+//                 AplicativoEntidade aplicativo = new AplicativoEntidade(codigoAplicativo, null, codigo);
+
+//                 AssinaturaEntidade assinatura = new AssinaturaEntidade(
+//                     rs.getLong("codigo"),
+//                     aplicativo,
+//                     cliente,
+//                     rs.getDate("data_inicio").toLocalDate(),
+//                     rs.getDate("data_expiracao").toLocalDate());
+
+//                 return assinatura;
+//         });
+//         return assinaturas;
+//     }
+// }

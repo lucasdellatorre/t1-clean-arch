@@ -26,4 +26,19 @@ public class ServicoDeAssinatura {
     public List<AssinaturaEntidade> listarAssinaturasPorTipo(String tipo) {
         return assinaturaRepositorio.listarAssinaturasPorTipo(tipo);
     }
+    
+    public AssinaturaEntidade getAssinaturaById(long codigo) {
+        return this.assinaturaRepositorio.getAssinaturaById(codigo);
+    }
+
+    public boolean verificarAssinaturaInvalida(AssinaturaEntidade assinatura) {
+        LocalDate dataAtual = LocalDate.now();
+        LocalDate dataExpiracao = assinatura.getFimVigencia();
+
+        return dataExpiracao.isEqual(dataAtual) || dataExpiracao.isAfter(dataAtual);
+    }
+
+    public List<AssinaturaEntidade> getAssinaturasCliente(long codigo) {
+        return this.assinaturaRepositorio.getAssinaturasCliente(codigo);
+    }
 }
