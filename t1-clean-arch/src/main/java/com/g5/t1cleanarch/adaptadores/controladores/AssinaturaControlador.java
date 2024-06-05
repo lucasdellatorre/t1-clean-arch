@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.g5.t1cleanarch.aplicacao.casosDeUso.AssinaturaInvalidaUC;
 import com.g5.t1cleanarch.aplicacao.casosDeUso.CriaAssinaturaUC;
+import com.g5.t1cleanarch.aplicacao.casosDeUso.ListaAssinaturasAplicativoUC;
 import com.g5.t1cleanarch.aplicacao.casosDeUso.ListaAssinaturasClienteUC;
 import com.g5.t1cleanarch.aplicacao.casosDeUso.ListaAssinaturasTipoUC;
 import com.g5.t1cleanarch.aplicacao.dtos.AssinaturaDTO;
@@ -23,14 +24,21 @@ public class AssinaturaControlador {
     private ListaAssinaturasTipoUC listaAssinaturasTipo;
     private ListaAssinaturasClienteUC listaAssinaturasCliente;
     private AssinaturaInvalidaUC assinaturaInvalida;
+    private ListaAssinaturasAplicativoUC listaAssinaturasAplicativo;
 
-    public AssinaturaControlador(CriaAssinaturaUC criaAssinaturaUC, ListaAssinaturasTipoUC listaAssinaturasTipoUC, ListaAssinaturasClienteUC listaAssinaturasClienteUC, AssinaturaInvalidaUC assinaturaInvalidaUC) {
+    public AssinaturaControlador(
+        CriaAssinaturaUC criaAssinaturaUC, 
+        ListaAssinaturasClienteUC listaAssinaturasCliente,
+        ListaAssinaturasAplicativoUC listaAssinaturasAplicativo,
+        AssinaturaInvalidaUC assinaturaInvalida
+        ) {
         this.criaAssinatura = criaAssinaturaUC;
-        this.listaAssinaturasTipo = listaAssinaturasTipoUC;
-        this.listaAssinaturasCliente = listaAssinaturasClienteUC;
-        this.assinaturaInvalida = assinaturaInvalidaUC;
+        this.assinaturaInvalida = assinaturaInvalida;
+        this.listaAssinaturasCliente = listaAssinaturasCliente;
+        this.assinaturaInvalida = assinaturaInvalida;
+        this.listaAssinaturasAplicativo = listaAssinaturasAplicativo;
     }
-
+  
     @PostMapping("servcad/assinaturas")
     @CrossOrigin(origins = "*")
     public AssinaturaDTO criaAssinatura(@RequestBody CriaAssinaturaRequisicaoDTO assinatura) {
@@ -47,6 +55,12 @@ public class AssinaturaControlador {
     @CrossOrigin(origins = "*")
     public List<AssinaturaStatusDTO> listaAssinaturasCliente(@PathVariable(value="codcli") long codcli) {
         return listaAssinaturasCliente.run(codcli);
+    }
+
+    @GetMapping("servcad/assapp/{codapp}")
+    @CrossOrigin(origins = "*")
+    public List<AssinaturaStatusDTO> listaAssinaturasAplicativo(@PathVariable(value="codapp") long codapp) {
+        return listaAssinaturasAplicativo.run(codapp);
     }
 
     @GetMapping("assinvalida/{codass}")

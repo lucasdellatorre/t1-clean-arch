@@ -70,6 +70,10 @@ public class ServicoDeAssinatura {
         return assinaturaRepositorio.getAssinaturasCliente(codigo);
     }
 
+    public List<AssinaturaEntidade> getAssinaturasAplicativo(long codigo) {
+        return this.assinaturaRepositorio.getAssinaturasAplicativo(codigo);
+    }
+
     public AssinaturaEntidade atualizaAssinatura(AssinaturaEntidade assinatura) {
         return assinaturaRepositorio.atualizaAssinatura(assinatura);
     }

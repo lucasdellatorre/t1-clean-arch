@@ -11,6 +11,7 @@ public interface IAssinaturaRepositorio {
     AssinaturaEntidade cadastra(ClienteEntidade cliente, AplicativoEntidade aplicativo, LocalDate dataAtual, LocalDate dataExpiracao);
     AssinaturaEntidade getAssinaturaById(long codigo);
     List<AssinaturaEntidade> getAssinaturasCliente(long codigo);
+    List<AssinaturaEntidade> getAssinaturasAplicativo(long codigo);
     AssinaturaEntidade atualizaAssinatura(AssinaturaEntidade assinatura);
     List<AssinaturaEntidade> todas();
     List<AssinaturaEntidade> listaAssinaturasAtivas();
