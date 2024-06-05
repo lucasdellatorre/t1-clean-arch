@@ -25,7 +25,7 @@ public class ListaAssinaturasTipoUC {
         };
 
         return assinaturas.stream()
-            .map(assinatura -> AssinaturaStatusDTO.fromEntity(assinatura, servicoDeAssinatura.verificaStatusAssinatura(assinatura)))
+            .map(assinatura -> AssinaturaStatusDTO.fromEntity(assinatura, (servicoDeAssinatura.verificaStatusAssinatura(assinatura))))
             .toList();
     }
 }

@@ -22,8 +22,8 @@ public interface AssinaturaJPA_ItfRep extends CrudRepository<Assinatura, Long> {
     List<Assinatura> findByAplicativoCodigo(@Param("aplicativoCodigo") long aplicativoCodigo);
     
     @Query("SELECT a FROM Assinatura a WHERE a.fimVigencia < CURRENT_DATE")
-    List<Assinatura> findAllAssinaturasAtivas();
+    List<Assinatura> findAllAssinaturasCanceladas();
 
     @Query("SELECT a FROM Assinatura a WHERE a.fimVigencia >= CURRENT_DATE")
-    List<Assinatura> findAllAssinaturasCanceladas();
+    List<Assinatura> findAllAssinaturasAtivas();
 }
