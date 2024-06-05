@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.g5.t1cleanarch.aplicacao.casosDeUso.AssinaturaInvalidaUC;
 import com.g5.t1cleanarch.aplicacao.casosDeUso.CriaAssinaturaUC;
+import com.g5.t1cleanarch.aplicacao.casosDeUso.ListaAssinaturasAplicativoUC;
 import com.g5.t1cleanarch.aplicacao.casosDeUso.ListaAssinaturasClienteUC;
 import com.g5.t1cleanarch.aplicacao.dtos.AssinaturaDTO;
 import com.g5.t1cleanarch.aplicacao.dtos.AssinaturaStatusDTO;
@@ -21,15 +22,18 @@ public class AssinaturaControlador {
     private CriaAssinaturaUC criaAssinatura;
     private AssinaturaInvalidaUC assinaturaInvalida;
     private ListaAssinaturasClienteUC listaAssinaturasCliente;
+    private ListaAssinaturasAplicativoUC listaAssinaturasAplicativo;
 
     public AssinaturaControlador(
         CriaAssinaturaUC criaAssinaturaUC, 
         ListaAssinaturasClienteUC listaAssinaturasCliente,
+        ListaAssinaturasAplicativoUC listaAssinaturasAplicativo,
         AssinaturaInvalidaUC assinaturaInvalida
         ) {
         this.criaAssinatura = criaAssinaturaUC;
         this.assinaturaInvalida = assinaturaInvalida;
         this.listaAssinaturasCliente = listaAssinaturasCliente;
+        this.listaAssinaturasAplicativo = listaAssinaturasAplicativo;
     }
 
     @PostMapping("servcad/assinaturas")
@@ -42,6 +46,12 @@ public class AssinaturaControlador {
     @CrossOrigin(origins = "*")
     public List<AssinaturaStatusDTO> listaAssinaturasCliente(@PathVariable(value="codcli") long codcli) {
         return listaAssinaturasCliente.run(codcli);
+    }
+
+    @GetMapping("servcad/assapp/{codapp}")
+    @CrossOrigin(origins = "*")
+    public List<AssinaturaStatusDTO> listaAssinaturasAplicativo(@PathVariable(value="codapp") long codapp) {
+        return listaAssinaturasAplicativo.run(codapp);
     }
 
     @GetMapping("assinvalida/{codass}")

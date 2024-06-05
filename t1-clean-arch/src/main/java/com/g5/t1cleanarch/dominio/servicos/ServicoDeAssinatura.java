@@ -43,6 +43,10 @@ public class ServicoDeAssinatura {
         return this.assinaturaRepositorio.getAssinaturasCliente(codigo);
     }
 
+    public List<AssinaturaEntidade> getAssinaturasAplicativo(long codigo) {
+        return this.assinaturaRepositorio.getAssinaturasAplicativo(codigo);
+    }
+
     public AssinaturaEntidade atualizaAssinatura(AssinaturaEntidade assinatura) {
         return this.assinaturaRepositorio.atualizaAssinatura(assinatura);
     }

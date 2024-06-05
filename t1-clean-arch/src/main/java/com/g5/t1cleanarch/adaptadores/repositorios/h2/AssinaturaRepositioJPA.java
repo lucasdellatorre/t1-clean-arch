@@ -49,6 +49,19 @@ public class AssinaturaRepositioJPA implements IAssinaturaRepositorio {
             .toList();
     }
 
+    @Override
+    public List<AssinaturaEntidade> getAssinaturasAplicativo(long codigo) {
+        List<Assinatura> assinaturas = assinaturaRepositorio.findByAplicativoCodigo(codigo);
+
+        if (assinaturas.size() == 0) {
+            return new LinkedList<AssinaturaEntidade>();
+        }
+
+        return assinaturas.stream()
+            .map(assinatura -> Assinatura.toAssinaturaEntidade(assinatura))
+            .toList();
+    }
+
     public List<AssinaturaEntidade> todas() {
         List<Assinatura> assinaturas = assinaturaRepositorio.findAll();
 

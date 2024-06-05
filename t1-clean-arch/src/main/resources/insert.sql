@@ -20,3 +20,6 @@ INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigenc
 INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigencia, fim_vigencia) VALUES (3, 3, 3, '2024-06-03', '2024-06-10');
 INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigencia, fim_vigencia) VALUES (4, 4, 4, '2024-06-03', '2024-06-10');
 INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigencia, fim_vigencia) VALUES (5, 5, 5, '2024-06-03', '2024-06-10');
+INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigencia, fim_vigencia) VALUES (6, 2, 1, '2024-06-03', '2024-06-10');
+INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigencia, fim_vigencia) VALUES (7, 4, 1, '2024-04-03', '2024-04-10');
+INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigencia, fim_vigencia) VALUES (8, 4, 5, '2024-03-03', '2024-03-10');
