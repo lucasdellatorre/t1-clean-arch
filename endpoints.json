@@ -1,0 +1,134 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "t1-monolito",
+    "collectionId": "c708fe71-0910-4c13-9c0b-9fbb4b75c4d8",
+    "dateExported": "2024-06-05T01:51:00.756Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "b96c5275-efb2-4740-890c-77a5bbd87ad8",
+            "colId": "c708fe71-0910-4c13-9c0b-9fbb4b75c4d8",
+            "containerId": "",
+            "name": "criar assinatura",
+            "url": "http://localhost:8080/servcad/assinaturas",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-06-04T21:40:33.977Z",
+            "modified": "2024-06-04T21:40:33.977Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"codigoCliente\": 2,\n  \"codigoAplicativo\": 1\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "6056e180-8f84-4446-af1e-31a2609deac7",
+            "colId": "c708fe71-0910-4c13-9c0b-9fbb4b75c4d8",
+            "containerId": "",
+            "name": "registrar pagamento",
+            "url": "http://localhost:8080/registrarPagamento",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-06-04T21:40:50.827Z",
+            "modified": "2024-06-04T21:40:50.827Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"codass\": 1,\n    \"dataPagamento\": \"2024-06-04\",\n    \"valorPago\": 10\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "36cdaacd-2587-4bf0-815d-eb568d009056",
+            "colId": "c708fe71-0910-4c13-9c0b-9fbb4b75c4d8",
+            "containerId": "",
+            "name": "lista clientes",
+            "url": "http://localhost:8080/servcad/clientes",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-06-04T21:41:34.238Z",
+            "modified": "2024-06-04T21:41:54.452Z",
+            "headers": []
+        },
+        {
+            "_id": "46544b8e-6183-417b-87a3-762442f9e25a",
+            "colId": "c708fe71-0910-4c13-9c0b-9fbb4b75c4d8",
+            "containerId": "",
+            "name": "lista aplicativos",
+            "url": "http://localhost:8080/servcad/aplicativos",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-06-04T21:42:08.416Z",
+            "modified": "2024-06-04T21:42:17.432Z",
+            "headers": []
+        },
+        {
+            "_id": "d58298ab-585f-4ead-a82b-40355a9195fb",
+            "colId": "c708fe71-0910-4c13-9c0b-9fbb4b75c4d8",
+            "containerId": "",
+            "name": "atualiza custo mensal aplicativo",
+            "url": "http://localhost:8080/servcad/aplicativos/atualizacusto/1",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-06-04T21:42:38.564Z",
+            "modified": "2024-06-04T21:43:12.573Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"custo\": 10\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "8af6955c-6ce6-4d7d-8523-2b89d8fa07a8",
+            "colId": "c708fe71-0910-4c13-9c0b-9fbb4b75c4d8",
+            "containerId": "",
+            "name": "lista assinaturas conforme tipo",
+            "url": "http://localhost:8080/servcad/assinaturas/TODAS",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-06-04T21:43:40.093Z",
+            "modified": "2024-06-05T01:35:17.223Z",
+            "headers": []
+        },
+        {
+            "_id": "443af23f-1374-49e8-81ef-be96fb846458",
+            "colId": "c708fe71-0910-4c13-9c0b-9fbb4b75c4d8",
+            "containerId": "",
+            "name": "lista assinaturas por cliente",
+            "url": "http://localhost:8080/servcad/asscli/2",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-06-04T21:44:49.441Z",
+            "modified": "2024-06-04T21:44:49.442Z",
+            "headers": []
+        },
+        {
+            "_id": "4c6c666e-5820-4405-ae9e-3fcb722eaa9b",
+            "colId": "c708fe71-0910-4c13-9c0b-9fbb4b75c4d8",
+            "containerId": "",
+            "name": "retorna lista de assinaturas de um aplicativo",
+            "url": "http://localhost:8080/servcad/assapp/2",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-06-04T21:45:18.202Z",
+            "modified": "2024-06-05T01:48:46.432Z",
+            "headers": []
+        },
+        {
+            "_id": "d851ac08-7378-4a81-b4ee-321984785790",
+            "colId": "c708fe71-0910-4c13-9c0b-9fbb4b75c4d8",
+            "containerId": "",
+            "name": "retorna se assinatura permanece ativa",
+            "url": "http://localhost:8080/assinvalida/1",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2024-06-04T21:45:50.869Z",
+            "modified": "2024-06-04T21:45:50.869Z",
+            "headers": []
+        }
+    ],
+    "ref": "as6XBZn23w83cwWpzK5DdJzRYEpEyPg3nMGPLVmmEHqpy9e6QSnidoULkjq5tC7ROlaWWewoVizkoShOgk7CVA"
+}
