@@ -29,8 +29,6 @@ public class AssinaturaRepositioJPA implements IAssinaturaRepositorio {
     public AssinaturaEntidade cadastra(ClienteEntidade cliente, AplicativoEntidade aplicativo, LocalDate dataAtual, LocalDate dataExpiracao) {
         Assinatura assinatura = new Assinatura(Aplicativo.fromAplicativoEntidade(aplicativo), Cliente.fromClienteEntidade(cliente), dataAtual, dataExpiracao);
 
-        System.out.println(assinatura);
-
         this.assinaturaRepositorio.save(assinatura);
 
         return Assinatura.toAssinaturaEntidade(assinatura);
@@ -84,5 +82,23 @@ public class AssinaturaRepositioJPA implements IAssinaturaRepositorio {
     public AssinaturaEntidade atualizaAssinatura(AssinaturaEntidade assinaturaEntidade) {
         Assinatura assinatura = assinaturaRepositorio.save(Assinatura.fromAssinaturaEntidade(assinaturaEntidade));
         return Assinatura.toAssinaturaEntidade(assinatura);
+    }
+
+    @Override
+    public List<AssinaturaEntidade> listaAssinaturasAtivas() {
+        List<Assinatura> assinaturas = assinaturaRepositorio.findAllAssinaturasAtivas();
+
+        return assinaturas.stream()
+            .map(assinatura -> Assinatura.toAssinaturaEntidade(assinatura))
+            .toList();
+    }
+
+    @Override
+    public List<AssinaturaEntidade> listaAssinaturasCanceladas() {
+        List<Assinatura> assinaturas = assinaturaRepositorio.findAllAssinaturasCanceladas();
+
+        return assinaturas.stream()
+            .map(assinatura -> Assinatura.toAssinaturaEntidade(assinatura))
+            .toList();
     }
 }

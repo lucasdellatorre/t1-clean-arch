@@ -36,7 +36,7 @@ public class RegistraPagamentoUC {
         }
 
         LocalDate novaDataFimVigencia;
-        boolean assinaturaAtiva = servicoDeAssinatura.verificarAssinaturaInvalida(assinatura);
+        boolean assinaturaAtiva = servicoDeAssinatura.verificarAssinaturaValida(assinatura);
 
         if (assinaturaAtiva) {
             long diferencaEntreDataPagamentoEFimVigenciaEmDias = ChronoUnit.DAYS.between(dataPagamento, assinatura.getFimVigencia());

@@ -13,4 +13,7 @@ public interface IAssinaturaRepositorio {
     List<AssinaturaEntidade> getAssinaturasCliente(long codigo);
     List<AssinaturaEntidade> getAssinaturasAplicativo(long codigo);
     AssinaturaEntidade atualizaAssinatura(AssinaturaEntidade assinatura);
+    List<AssinaturaEntidade> todas();
+    List<AssinaturaEntidade> listaAssinaturasAtivas();
+    List<AssinaturaEntidade> listaAssinaturasCanceladas();
 }
