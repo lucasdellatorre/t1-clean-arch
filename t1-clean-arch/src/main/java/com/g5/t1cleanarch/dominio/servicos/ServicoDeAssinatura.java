@@ -59,7 +59,7 @@ public class ServicoDeAssinatura {
         LocalDate dataAtual = LocalDate.now();
         LocalDate dataExpiracao = assinatura.getFimVigencia();
 
-        return dataExpiracao.isEqual(dataAtual) || dataExpiracao.isAfter(dataAtual);
+        return dataAtual.isBefore(dataExpiracao);
     }
 
     public boolean verificaValorAssinaturaValida(AssinaturaEntidade assinatura, double valorPago) {
