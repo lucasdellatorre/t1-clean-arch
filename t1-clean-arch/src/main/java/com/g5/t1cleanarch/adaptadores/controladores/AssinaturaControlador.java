@@ -53,11 +53,6 @@ public class AssinaturaControlador {
     @CrossOrigin(origins = "*")
     public boolean verificaAssinaturaValida(@PathVariable(value="codass") long codass) {
         return assinaturaInvalida.run(codass);
-    }
 
-    // @GetMapping("servcad/assinaturas")
-    // @CrossOrigin(origins = "*")
-    // public List<AssinaturaStatusDTO> listaAssinaturas() {
-    //     return listaAssinaturasCliente.run(codcli);
-    // }
+    }
 }

@@ -16,6 +16,6 @@ public class AssinaturaInvalidaUC {
     public boolean run(long codigo) {
         AssinaturaEntidade assinatura = servicoDeAssinatura.getAssinaturaById(codigo);
         if (assinatura == null) return false;
-        return servicoDeAssinatura.verificarAssinaturaInvalida(assinatura);
+        return servicoDeAssinatura.verificarAssinaturaValida(assinatura);
     }
 }

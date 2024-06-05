@@ -15,9 +15,8 @@ INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (3, 'app 3', 40.0);
 INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (4, 'app 4', 50.0);
 INSERT INTO aplicativo (codigo, nome, custo_mensal) VALUES (5, 'app 5', 99.99);
 
-INSERT INTO assinatura (fim_vigencia, inicio_vigencia, aplicativo_codigo, cliente_codigo, codigo) VALUES ('2024-06-04', '2024-07-04', 1, 1, 1);
-INSERT INTO assinatura (fim_vigencia, inicio_vigencia, aplicativo_codigo, cliente_codigo, codigo) VALUES ('2024-06-04', '2024-07-04', 2, 2, 2);
-INSERT INTO assinatura (fim_vigencia, inicio_vigencia, aplicativo_codigo, cliente_codigo, codigo) VALUES ('2024-06-04', '2024-07-04', 3, 3, 3);
-
-INSERT INTO assinatura (fim_vigencia, inicio_vigencia, aplicativo_codigo, cliente_codigo, codigo) VALUES ('2024-06-02', '2024-07-04', 4, 4, 4);
-INSERT INTO assinatura (fim_vigencia, inicio_vigencia, aplicativo_codigo, cliente_codigo, codigo) VALUES ('2024-06-02', '2024-07-04', 5, 5, 5);
+INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigencia, fim_vigencia) VALUES (1, 1, 1, '2024-06-03', '2024-06-10');
+INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigencia, fim_vigencia) VALUES (2, 2, 2, '2024-06-03', '2024-06-10');
+INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigencia, fim_vigencia) VALUES (3, 3, 3, '2024-06-03', '2024-06-10');
+INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigencia, fim_vigencia) VALUES (4, 4, 4, '2024-06-03', '2024-06-10');
+INSERT INTO assinatura (codigo, aplicativo_codigo, cliente_codigo, inicio_vigencia, fim_vigencia) VALUES (5, 5, 5, '2024-06-03', '2024-06-10');

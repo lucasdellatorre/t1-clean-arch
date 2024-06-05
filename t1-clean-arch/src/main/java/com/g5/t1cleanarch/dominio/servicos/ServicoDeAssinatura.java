@@ -1,12 +1,14 @@
 package com.g5.t1cleanarch.dominio.servicos;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.g5.t1cleanarch.dominio.entidades.AplicativoEntidade;
 import com.g5.t1cleanarch.dominio.entidades.ClienteEntidade;
+import com.g5.t1cleanarch.dominio.enums.Status;
 import com.g5.t1cleanarch.dominio.entidades.AssinaturaEntidade;
 import com.g5.t1cleanarch.dominio.repositorios.IAssinaturaRepositorio;
 
@@ -25,14 +27,35 @@ public class ServicoDeAssinatura {
     }
 
     public List<AssinaturaEntidade> listarAssinaturasPorTipo(String tipo) {
-        return this.assinaturaRepositorio.listarAssinaturasPorTipo(tipo);
+        return switch(tipo.toUpperCase()) {
+            case "TODAS" -> listaAssinaturas();
+            case "ATIVAS" -> listaAssinaturasAtivas();
+            case "CANCELADAS" -> listaAssinaturasCanceladas();
+            default -> new LinkedList<AssinaturaEntidade>();
+        };
+    }
+
+    public List<AssinaturaEntidade> listaAssinaturas() {
+        return assinaturaRepositorio.todas();
+    }
+
+    public List<AssinaturaEntidade> listaAssinaturasAtivas() {
+        return assinaturaRepositorio.listaAssinaturasAtivas();
+    }
+
+    public List<AssinaturaEntidade> listaAssinaturasCanceladas() {
+        return assinaturaRepositorio.listaAssinaturasCanceladas();
     }
 
     public AssinaturaEntidade getAssinaturaById(long codigo) {
-        return this.assinaturaRepositorio.getAssinaturaById(codigo);
+        return assinaturaRepositorio.getAssinaturaById(codigo);
     }
 
-    public boolean verificarAssinaturaInvalida(AssinaturaEntidade assinatura) {
+    public Status verificaStatusAssinatura(AssinaturaEntidade assinatura) {
+        return verificarAssinaturaValida(assinatura) ? Status.ATIVA : Status.CANCELADA;
+    }
+
+    public boolean verificarAssinaturaValida(AssinaturaEntidade assinatura) {
         LocalDate dataAtual = LocalDate.now();
         LocalDate dataExpiracao = assinatura.getFimVigencia();
 
@@ -44,10 +67,10 @@ public class ServicoDeAssinatura {
     }
 
     public List<AssinaturaEntidade> getAssinaturasCliente(long codigo) {
-        return this.assinaturaRepositorio.getAssinaturasCliente(codigo);
+        return assinaturaRepositorio.getAssinaturasCliente(codigo);
     }
 
     public AssinaturaEntidade atualizaAssinatura(AssinaturaEntidade assinatura) {
-        return this.assinaturaRepositorio.atualizaAssinatura(assinatura);
+        return assinaturaRepositorio.atualizaAssinatura(assinatura);
     }
 }

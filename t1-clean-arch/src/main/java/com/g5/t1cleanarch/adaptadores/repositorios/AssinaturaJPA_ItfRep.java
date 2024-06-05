@@ -10,11 +10,17 @@ import org.springframework.lang.NonNull;
 import com.g5.t1cleanarch.adaptadores.repositorios.entidades.Assinatura;
 
 public interface AssinaturaJPA_ItfRep extends CrudRepository<Assinatura, Long> {
-        @Override
+    @Override
     @NonNull
     List<Assinatura> findAll();
     Assinatura findById(long codigo);
 
     @Query("SELECT a FROM Assinatura a WHERE a.cliente.codigo = :clienteCodigo")
     List<Assinatura> findByClienteCodigo(@Param("clienteCodigo") long clienteCodigo);
+
+    @Query("SELECT a FROM Assinatura a WHERE a.fimVigencia < CURRENT_DATE")
+    List<Assinatura> findAllAssinaturasAtivas();
+
+    @Query("SELECT a FROM Assinatura a WHERE a.fimVigencia >= CURRENT_DATE")
+    List<Assinatura> findAllAssinaturasCanceladas();
 }
