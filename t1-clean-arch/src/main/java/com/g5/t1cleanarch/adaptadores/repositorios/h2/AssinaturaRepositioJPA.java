@@ -9,11 +9,10 @@ import java.util.stream.Collectors;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import com.g5.t1cleanarch.adaptadores.repositorios.Aplicativo;
-import com.g5.t1cleanarch.adaptadores.repositorios.Assinatura;
 import com.g5.t1cleanarch.adaptadores.repositorios.AssinaturaJPA_ItfRep;
-import com.g5.t1cleanarch.adaptadores.repositorios.Cliente;
-import com.g5.t1cleanarch.aplicacao.dtos.AssinaturaStatusDTO;
+import com.g5.t1cleanarch.adaptadores.repositorios.entidades.Aplicativo;
+import com.g5.t1cleanarch.adaptadores.repositorios.entidades.Assinatura;
+import com.g5.t1cleanarch.adaptadores.repositorios.entidades.Cliente;
 import com.g5.t1cleanarch.dominio.entidades.AplicativoEntidade;
 import com.g5.t1cleanarch.dominio.entidades.AssinaturaEntidade;
 import com.g5.t1cleanarch.dominio.entidades.ClienteEntidade;
