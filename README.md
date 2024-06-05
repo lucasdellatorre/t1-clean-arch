@@ -1,21 +1,9 @@
-# t1-g5-clean-arch
+# Trabalho 1 de Projeto e Arquitetura de software
 
-# Endpoints
+Backend de um sistema de controle de assinaturas de aplicativos utilizando clean architecture.
 
-GET /servcad/cliente - FEITO
+![image](https://github.com/lucasdellatorre/t1-clean-arch/assets/70493217/78060bae-dd7f-40b7-a255-d94e44cdf685)
 
-GET /servcad/aplicativos - FEITO
+# Documentação e Especificação
 
-POST /servcad/assinatura - FEITO
-
-POST /servcad/aplicativos/atualizacusto/:idAplicativ - FEITO
-
-GET /servcad/assinaturas/{tipo} - FEITO
-
-GET /servcad/asscli/:codcli - FEITO
-
-GET /servcad/assapp/:codapp
-
-POST /registrarpagamento - FEITO
-
-GET /assinvalida/:codass - FEITO
+Documentação de endpoints e especificação do sistema está no relatório T1_2024_1.pdf.
