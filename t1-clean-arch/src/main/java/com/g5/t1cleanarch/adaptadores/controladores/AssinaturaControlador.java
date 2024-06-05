@@ -28,12 +28,13 @@ public class AssinaturaControlador {
 
     public AssinaturaControlador(
         CriaAssinaturaUC criaAssinaturaUC, 
+        ListaAssinaturasTipoUC listaAssinaturasTipo,
         ListaAssinaturasClienteUC listaAssinaturasCliente,
         ListaAssinaturasAplicativoUC listaAssinaturasAplicativo,
         AssinaturaInvalidaUC assinaturaInvalida
         ) {
         this.criaAssinatura = criaAssinaturaUC;
-        this.assinaturaInvalida = assinaturaInvalida;
+        this.listaAssinaturasTipo = listaAssinaturasTipo;
         this.listaAssinaturasCliente = listaAssinaturasCliente;
         this.assinaturaInvalida = assinaturaInvalida;
         this.listaAssinaturasAplicativo = listaAssinaturasAplicativo;

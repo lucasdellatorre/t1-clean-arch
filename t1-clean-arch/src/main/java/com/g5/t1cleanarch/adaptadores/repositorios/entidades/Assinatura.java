@@ -22,7 +22,7 @@ public class Assinatura {
       strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
       parameters = {
         @Parameter(name = "sequence_name", value = "assinatura_sequence"),
-        @Parameter(name = "initial_value", value = "6"),
+        @Parameter(name = "initial_value", value = "9"),
         @Parameter(name = "increment_size", value = "1")
         }
     )
