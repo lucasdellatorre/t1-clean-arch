@@ -34,8 +34,6 @@ public class CriaAssinaturaUC {
         ClienteEntidade cliente = this.servicoDeClientes.getClientePorCodigo(codCliente);
         AplicativoEntidade aplicativo = this.servicoDeAplicativos.getAplicativoPorCodigo(codAplicativo);
 
-        System.out.println("tga chegando aqui");
-
         if (cliente == null || aplicativo == null) {
             return null;
         } 
