@@ -1,10 +1,10 @@
-package com.g5.t2_clean_arch;
+package com.g5.name_server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class T2CleanArchApplicationTests {
+class NameServerApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.g5</groupId>
-	<artifactId>t2-clean-arch</artifactId>
+	<artifactId>name-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>t2-clean-arch</name>
+	<name>name-server</name>
 	<description>Name server eureka</description>
 	<url/>
 	<licenses>
