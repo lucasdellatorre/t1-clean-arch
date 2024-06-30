@@ -1,0 +1,40 @@
+services: 
+  t1-clean-arch: 
+    build: t1-clean-arch 
+    image: t1-clean-arch
+    ports: 
+      - "8080:8080" 
+    networks: 
+      - t2-network 
+    depends_on: 
+      - name-server 
+    environment: 
+      - eureka.client.serviceUrl.defaultZone=http://name-server:8761/eureka
+      - eureka.instance.hostname=t1-clean-arch
+      - eureka.client.registerWithEureka=true
+      - eureka.client.fetchRegistry=true
+  api-gateway: 
+    build: api-gateway 
+    image: gateway 
+    ports: 
+      - "8765:8765" 
+    networks: 
+      - t2-network 
+    depends_on: 
+      - name-server 
+    environment: 
+      - eureka.client.serviceUrl.defaultZone=http://name-server:8761/eureka
+      - eureka.instance.hostname=api-gateway
+      - eureka.client.registerWithEureka=true
+      - eureka.client.fetchRegistry=true
+      - spring.cloud.gateway.discovery.locator.enabled=true
+      - spring.cloud.gateway.discovery.locator.lower-case-service-id=true
+  name-server: 
+    build: name-server 
+    image: nameserver 
+    ports: 
+      - "8761:8761" 
+    networks: 
+      - t2-network
+networks: 
+  t2-network:
