@@ -4,6 +4,7 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.support.converter.SimpleMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,6 +28,13 @@ public class RabbitMQConfig {
     @Bean
     public Queue updateQueue() {
         return new Queue(UPDATE_QUEUE);
+    }
+
+    @Bean
+    public SimpleMessageConverter simpleMessageConverter() {
+        SimpleMessageConverter converter = new SimpleMessageConverter();
+        converter.addAllowedListPatterns("*");
+        return converter;
     }
 
     @Bean

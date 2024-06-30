@@ -4,6 +4,7 @@ import com.g5.ass_cache.rabbitmq.RabbitMQConfig;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -25,7 +26,8 @@ public class AssCacheService {
         // Por exemplo:
         // cache.put(assinaturaId, isInvalid);
     }
-
+    
+    @Cacheable(cacheNames = "assinaturaCache", key = "#assinaturaId")
     public boolean checkAssinatura(int assinaturaId) {
         if (cache.containsKey(assinaturaId)) {
             return cache.get(assinaturaId);
@@ -38,6 +40,6 @@ public class AssCacheService {
 
     public void updateAssinatura(int assinaturaId) {
         // Ao pagar uma assinatura, por exemplo, remove a entrada do cache
-        cache.remove(assinaturaId);
+        //cache.remove(assinaturaId);
     }
 }
