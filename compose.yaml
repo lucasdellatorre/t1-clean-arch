@@ -29,6 +29,20 @@ services:
       - eureka.client.fetchRegistry=true
       - spring.cloud.gateway.discovery.locator.enabled=true
       - spring.cloud.gateway.discovery.locator.lower-case-service-id=true
+  ass-cache:
+    build: ass-cache
+    image: ass-cache
+    ports:
+      - "8082:8082"
+    networks:
+      - t2-network
+    depends_on:
+      - name-server
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://name-server:8761/eureka
+      - eureka.instance.hostname=ass-cache
+      - eureka.client.registerWithEureka=true
+      - eureka.client.fetchRegistry=true
   name-server: 
     build: name-server 
     image: nameserver 
