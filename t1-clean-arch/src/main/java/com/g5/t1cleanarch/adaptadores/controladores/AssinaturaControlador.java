@@ -2,6 +2,7 @@ package com.g5.t1cleanarch.adaptadores.controladores;
 
 import java.util.List;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import com.g5.t1cleanarch.aplicacao.casosDeUso.ListaAssinaturasTipoUC;
 import com.g5.t1cleanarch.aplicacao.dtos.AssinaturaDTO;
 import com.g5.t1cleanarch.aplicacao.dtos.AssinaturaStatusDTO;
 import com.g5.t1cleanarch.aplicacao.dtos.CriaAssinaturaRequisicaoDTO;
+import com.g5.t1cleanarch.rabbitmq.RabbitMQConfig;
 
 @RestController
 public class AssinaturaControlador {
@@ -25,19 +27,22 @@ public class AssinaturaControlador {
     private ListaAssinaturasClienteUC listaAssinaturasCliente;
     private AssinaturaInvalidaUC assinaturaInvalida;
     private ListaAssinaturasAplicativoUC listaAssinaturasAplicativo;
+    private RabbitTemplate rabbitTemplate;
 
     public AssinaturaControlador(
         CriaAssinaturaUC criaAssinaturaUC, 
         ListaAssinaturasTipoUC listaAssinaturasTipo,
         ListaAssinaturasClienteUC listaAssinaturasCliente,
         ListaAssinaturasAplicativoUC listaAssinaturasAplicativo,
-        AssinaturaInvalidaUC assinaturaInvalida
+        AssinaturaInvalidaUC assinaturaInvalida,
+        RabbitTemplate rabbitTemplate
         ) {
         this.criaAssinatura = criaAssinaturaUC;
         this.listaAssinaturasTipo = listaAssinaturasTipo;
         this.listaAssinaturasCliente = listaAssinaturasCliente;
         this.assinaturaInvalida = assinaturaInvalida;
         this.listaAssinaturasAplicativo = listaAssinaturasAplicativo;
+        this.rabbitTemplate = rabbitTemplate;
     }
   
     @PostMapping("servcad/assinaturas")
@@ -67,7 +72,12 @@ public class AssinaturaControlador {
     @GetMapping("assinvalida/{codass}")
     @CrossOrigin(origins = "*")
     public boolean verificaAssinaturaValida(@PathVariable(value="codass") long codass) {
-        return assinaturaInvalida.run(codass);
+        Boolean response = (Boolean) rabbitTemplate.convertSendAndReceive(RabbitMQConfig.REQUEST_QUEUE, codass);
+        if (response == null) {
+            response = assinaturaInvalida.run(codass);
+            rabbitTemplate.convertAndSend(RabbitMQConfig.UPDATE_QUEUE, codass);
+        }
+        return response;
 
     }
 }

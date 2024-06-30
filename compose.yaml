@@ -1,28 +1,33 @@
-services: 
-  t1-clean-arch: 
-    build: t1-clean-arch 
+services:
+  t1-clean-arch:
+    build: t1-clean-arch
     image: t1-clean-arch
-    ports: 
-      - "8080:8080" 
-    networks: 
-      - t2-network 
-    depends_on: 
-      - name-server 
-    environment: 
+    ports:
+      - "8080:8080"
+    networks:
+      - t2-network
+    depends_on:
+      - name-server
+      - rabbitmq
+    environment:
       - eureka.client.serviceUrl.defaultZone=http://name-server:8761/eureka
       - eureka.instance.hostname=t1-clean-arch
       - eureka.client.registerWithEureka=true
       - eureka.client.fetchRegistry=true
-  api-gateway: 
-    build: api-gateway 
-    image: gateway 
-    ports: 
-      - "8765:8765" 
-    networks: 
-      - t2-network 
-    depends_on: 
-      - name-server 
-    environment: 
+      - spring.rabbitmq.host=rabbitmq
+      - spring.rabbitmq.port=5672
+      - spring.rabbitmq.username=engsoft2
+      - spring.rabbitmq.password=engsoft2
+  api-gateway:
+    build: api-gateway
+    image: gateway
+    ports:
+      - "8765:8765"
+    networks:
+      - t2-network
+    depends_on:
+      - name-server
+    environment:
       - eureka.client.serviceUrl.defaultZone=http://name-server:8761/eureka
       - eureka.instance.hostname=api-gateway
       - eureka.client.registerWithEureka=true
@@ -38,17 +43,30 @@ services:
       - t2-network
     depends_on:
       - name-server
+      - rabbitmq
     environment:
       - eureka.client.serviceUrl.defaultZone=http://name-server:8761/eureka
       - eureka.instance.hostname=ass-cache
       - eureka.client.registerWithEureka=true
       - eureka.client.fetchRegistry=true
-  name-server: 
-    build: name-server 
-    image: nameserver 
-    ports: 
-      - "8761:8761" 
-    networks: 
+      - spring.rabbitmq.host=rabbitmq
+      - spring.rabbitmq.port=5672
+      - spring.rabbitmq.username=engsoft2
+      - spring.rabbitmq.password=engsoft2
+  name-server:
+    build: name-server
+    image: nameserver
+    ports:
+      - "8761:8761"
+    networks:
       - t2-network
-networks: 
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=engsoft2
+      - RABBITMQ_DEFAULT_PASS=engsoft2
+networks:
   t2-network:
