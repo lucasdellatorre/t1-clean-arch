@@ -72,7 +72,7 @@ public class AssinaturaControlador {
 
     @GetMapping("assinvalida/{codass}")
     @CrossOrigin(origins = "*")
-    public boolean verificaAssinaturaValida(@PathVariable(value="codass") long codass) {
+    public boolean verificaAssinaturaValida(@PathVariable(value="codass") int codass) {
         ResponseListener.reset();
         rabbitTemplate.convertAndSend(RabbitMQConfig.REQUEST_QUEUE, codass);
         int retries = 3;
