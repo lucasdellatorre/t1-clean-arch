@@ -25,7 +25,7 @@ public class PagamentoControlador {
     @CrossOrigin(origins = "*")
     public RegistraPagamentoDTO criaAssinatura(@RequestBody RegistraPagamentoRequisicaoDTO pagamento) {
         RegistraPagamentoDTO result = registraPagamentoUC.run(pagamento);
-        rabbitTemplate.convertAndSend(RabbitMQConfig.UPDATE_QUEUE, pagamento.getCodass());
+        rabbitTemplate.convertAndSend(RabbitMQConfig.DELETE_QUEUE, pagamento.getCodass());
         return result;
     }
 }

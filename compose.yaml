@@ -53,6 +53,7 @@ services:
       - spring.rabbitmq.port=5672
       - spring.rabbitmq.username=engsoft2
       - spring.rabbitmq.password=engsoft2
+      - SPRING_AMQP_DESERIALIZATION_TRUST_ALL=true
   name-server:
     build: name-server
     image: nameserver

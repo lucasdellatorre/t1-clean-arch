@@ -19,6 +19,7 @@ import com.g5.t1cleanarch.aplicacao.dtos.AssinaturaDTO;
 import com.g5.t1cleanarch.aplicacao.dtos.AssinaturaStatusDTO;
 import com.g5.t1cleanarch.aplicacao.dtos.CriaAssinaturaRequisicaoDTO;
 import com.g5.t1cleanarch.rabbitmq.RabbitMQConfig;
+import com.g5.t1cleanarch.rabbitmq.ResponseListener;
 
 @RestController
 public class AssinaturaControlador {
@@ -72,12 +73,25 @@ public class AssinaturaControlador {
     @GetMapping("assinvalida/{codass}")
     @CrossOrigin(origins = "*")
     public boolean verificaAssinaturaValida(@PathVariable(value="codass") long codass) {
-        Boolean response = (Boolean) rabbitTemplate.convertSendAndReceive(RabbitMQConfig.REQUEST_QUEUE, codass);
-        if (response == null) {
-            response = assinaturaInvalida.run(codass);
-            rabbitTemplate.convertAndSend(RabbitMQConfig.UPDATE_QUEUE, codass);
+        ResponseListener.reset();
+        rabbitTemplate.convertAndSend(RabbitMQConfig.REQUEST_QUEUE, codass);
+        int retries = 3;
+        while (!ResponseListener.isResponseReceived() && retries > 0) {
+            try {
+                Thread.sleep(100); // Aguarda 100ms entre tentativas
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Thread interrupted", e);
+            }
+            retries--;
         }
-        return response;
+        if (ResponseListener.isResponseReceived()) {
+            return ResponseListener.getCacheResponse();
+        } else {
+            boolean isInvalid = assinaturaInvalida.run(codass);
+            rabbitTemplate.convertAndSend(RabbitMQConfig.UPDATE_QUEUE, new Object[]{codass, isInvalid});
+            return isInvalid;
+        }
 
     }
 }

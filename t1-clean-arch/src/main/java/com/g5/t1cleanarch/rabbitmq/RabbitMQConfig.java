@@ -11,7 +11,9 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     public static final String REQUEST_QUEUE = "assinatura.request.queue";
+    public static final String RESPONSE_QUEUE = "assinatura.response.queue";
     public static final String UPDATE_QUEUE = "assinatura.update.queue";
+    public static final String DELETE_QUEUE = "assinatura.delete.queue";
     public static final String FANOUT_EXCHANGE = "assinatura.fanout.exchange";
 
     @Bean
@@ -25,8 +27,18 @@ public class RabbitMQConfig {
     }
 
     @Bean
+    public Queue responseQueue() {
+        return new Queue(RESPONSE_QUEUE);
+    }
+
+    @Bean
     public Queue updateQueue() {
         return new Queue(UPDATE_QUEUE);
+    }
+
+    @Bean
+    public Queue deleteQueue() {
+        return new Queue(DELETE_QUEUE);
     }
 
     @Bean
@@ -35,7 +47,17 @@ public class RabbitMQConfig {
     }
 
     @Bean
+    public Binding bindingResponse(Queue responseQueue, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(responseQueue).to(fanoutExchange);
+    }
+
+    @Bean
     public Binding bindingUpdate(Queue updateQueue, FanoutExchange fanoutExchange) {
         return BindingBuilder.bind(updateQueue).to(fanoutExchange);
+    }
+
+    @Bean
+    public Binding bindingDelete(Queue deleteQueue, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(deleteQueue).to(fanoutExchange);
     }
 }
