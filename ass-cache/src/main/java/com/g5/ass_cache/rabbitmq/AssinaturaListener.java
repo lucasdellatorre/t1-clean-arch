@@ -12,7 +12,7 @@ import java.util.Map;
 public class AssinaturaListener {
 
     private final RabbitTemplate rabbitTemplate;
-    private Map<Integer, Boolean> assinaturaCache = new HashMap<>();
+    private Map<Long, Boolean> assinaturaCache = new HashMap<>();
 
     @Autowired
     public AssinaturaListener(RabbitTemplate rabbitTemplate) {
@@ -20,22 +20,29 @@ public class AssinaturaListener {
     }
 
     @RabbitListener(queues = RabbitMQConfig.REQUEST_QUEUE)
-    public void handleRequest(Integer codass) {
+    public void handleRequest(long codass) {
         Boolean isInvalid = assinaturaCache.get(codass);
         if (isInvalid != null) {
+            System.out.println("Dado encontrado na cache enviado para a sistema");
             rabbitTemplate.convertAndSend(RabbitMQConfig.RESPONSE_QUEUE, isInvalid);
         }
     }
 
     @RabbitListener(queues = RabbitMQConfig.UPDATE_QUEUE)
     public void handleUpdate(Object[] assinaturaStatus) {
-        Integer codass = (Integer) assinaturaStatus[0];
+        Long codass = (Long) assinaturaStatus[0];
         Boolean isInvalid = (Boolean) assinaturaStatus[1];
         assinaturaCache.put(codass, isInvalid);
+        System.out.println("Dado atualizado na cache");
+        System.out.println("codass: " + codass + ", valor: " + assinaturaCache.get(codass));
     }
 
     @RabbitListener(queues = RabbitMQConfig.DELETE_QUEUE)
-    public void handleDelete(Integer codass) {
-        assinaturaCache.remove(codass);
+    public void handleDelete(Long codass) {
+        System.out.println("pedido recebido");
+        if (assinaturaCache.containsKey(codass)) {
+            assinaturaCache.remove(codass);
+            System.out.println("Dado removido da cache");
+        }
     }
 }

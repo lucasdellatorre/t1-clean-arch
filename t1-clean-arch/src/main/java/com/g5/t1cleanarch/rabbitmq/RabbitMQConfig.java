@@ -15,10 +15,16 @@ public class RabbitMQConfig {
     public static final String UPDATE_QUEUE = "assinatura.update.queue";
     public static final String DELETE_QUEUE = "assinatura.delete.queue";
     public static final String FANOUT_EXCHANGE = "assinatura.fanout.exchange";
+    public static final String DELETE_FANOUT_EXCHANGE = "assinatura.delete.fanout.exchange";
 
     @Bean
     public FanoutExchange fanoutExchange() {
         return new FanoutExchange(FANOUT_EXCHANGE);
+    }
+
+    @Bean
+    public FanoutExchange deleteFanoutExchange() {
+        return new FanoutExchange(DELETE_FANOUT_EXCHANGE);
     }
 
     @Bean
@@ -57,7 +63,7 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding bindingDelete(Queue deleteQueue, FanoutExchange fanoutExchange) {
-        return BindingBuilder.bind(deleteQueue).to(fanoutExchange);
+    public Binding bindingDelete(Queue deleteQueue, FanoutExchange deleteFanoutExchange) {
+        return BindingBuilder.bind(deleteQueue).to(deleteFanoutExchange);
     }
 }

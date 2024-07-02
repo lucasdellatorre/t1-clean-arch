@@ -72,7 +72,7 @@ public class AssinaturaControlador {
 
     @GetMapping("assinvalida/{codass}")
     @CrossOrigin(origins = "*")
-    public boolean verificaAssinaturaValida(@PathVariable(value="codass") int codass) {
+    public boolean verificaAssinaturaValida(@PathVariable(value="codass") long codass) {
         ResponseListener.reset();
         rabbitTemplate.convertAndSend(RabbitMQConfig.REQUEST_QUEUE, codass);
         int retries = 3;
@@ -92,6 +92,5 @@ public class AssinaturaControlador {
             rabbitTemplate.convertAndSend(RabbitMQConfig.UPDATE_QUEUE, new Object[]{codass, isInvalid});
             return isInvalid;
         }
-
     }
 }

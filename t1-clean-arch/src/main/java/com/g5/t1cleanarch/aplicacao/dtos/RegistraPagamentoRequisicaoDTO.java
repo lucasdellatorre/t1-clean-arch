@@ -24,4 +24,8 @@ public class RegistraPagamentoRequisicaoDTO {
     public LocalDate getDataPagamento() {
         return dataPagamento;
     }
+
+    public String toString() {
+        return "codass: " + codass + ", valorPago: " + valorPago + ", dataPagamento: " + dataPagamento;
+    }
 }
