@@ -1,5 +1,6 @@
 package com.g5.ass_cache.rabbitmq;
 
+import org.springframework.amqp.core.AnonymousQueue;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
@@ -10,16 +11,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String REQUEST_QUEUE = "assinatura.request.queue";
     public static final String RESPONSE_QUEUE = "assinatura.response.queue";
-    public static final String UPDATE_QUEUE = "assinatura.update.queue";
-    public static final String DELETE_QUEUE = "assinatura.delete.queue";
-    public static final String FANOUT_EXCHANGE = "assinatura.fanout.exchange";
+    public static final String UPDATE_FANOUT_EXCHANGE = "assinatura.update.fanout.exchange";
+    public static final String REQUEST_FANOUT_EXCHANGE = "assinatura.request.fanout.exchange";
+    public static final String RESPONSE_FANOUT_EXCHANGE = "assinatura.response.fanout.exchange";
     public static final String DELETE_FANOUT_EXCHANGE = "assinatura.delete.fanout.exchange";
 
     @Bean
-    public FanoutExchange fanoutExchange() {
-        return new FanoutExchange(FANOUT_EXCHANGE);
+    public FanoutExchange requestFanoutExchange() {
+        return new FanoutExchange(REQUEST_FANOUT_EXCHANGE);
+    }
+
+    @Bean
+    public FanoutExchange responseFanoutExchange() {
+        return new FanoutExchange(RESPONSE_FANOUT_EXCHANGE);
+    }
+
+    @Bean
+    public FanoutExchange updateFanoutExchange() {
+        return new FanoutExchange(UPDATE_FANOUT_EXCHANGE);
     }
 
     @Bean
@@ -29,7 +39,7 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue requestQueue() {
-        return new Queue(REQUEST_QUEUE);
+        return new AnonymousQueue();
     }
 
     @Bean
@@ -39,27 +49,27 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue updateQueue() {
-        return new Queue(UPDATE_QUEUE);
+        return new AnonymousQueue();
     }
 
     @Bean
     public Queue deleteQueue() {
-        return new Queue(DELETE_QUEUE);
+        return new AnonymousQueue();
     }
 
     @Bean
-    public Binding bindingRequest(Queue requestQueue, FanoutExchange fanoutExchange) {
-        return BindingBuilder.bind(requestQueue).to(fanoutExchange);
+    public Binding bindingRequest(Queue requestQueue, FanoutExchange requestFanoutExchange) {
+        return BindingBuilder.bind(requestQueue).to(requestFanoutExchange);
     }
 
     @Bean
-    public Binding bindingResponse(Queue responseQueue, FanoutExchange fanoutExchange) {
-        return BindingBuilder.bind(responseQueue).to(fanoutExchange);
+    public Binding bindingResponse(Queue responseQueue, FanoutExchange responseFanoutExchange) {
+        return BindingBuilder.bind(responseQueue).to(responseFanoutExchange);
     }
 
     @Bean
-    public Binding bindingUpdate(Queue updateQueue, FanoutExchange fanoutExchange) {
-        return BindingBuilder.bind(updateQueue).to(fanoutExchange);
+    public Binding bindingUpdate(Queue updateQueue, FanoutExchange updateFanoutExchange) {
+        return BindingBuilder.bind(updateQueue).to(updateFanoutExchange);
     }
 
     @Bean

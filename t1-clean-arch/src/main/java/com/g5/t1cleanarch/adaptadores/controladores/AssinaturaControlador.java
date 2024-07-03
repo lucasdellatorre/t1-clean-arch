@@ -74,7 +74,7 @@ public class AssinaturaControlador {
     @CrossOrigin(origins = "*")
     public boolean verificaAssinaturaValida(@PathVariable(value="codass") long codass) {
         ResponseListener.reset();
-        rabbitTemplate.convertAndSend(RabbitMQConfig.REQUEST_QUEUE, codass);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.REQUEST_FANOUT_EXCHANGE, "", codass);
         int retries = 3;
         while (!ResponseListener.isResponseReceived() && retries > 0) {
             try {
@@ -89,7 +89,7 @@ public class AssinaturaControlador {
             return ResponseListener.getCacheResponse();
         } else {
             boolean isInvalid = assinaturaInvalida.run(codass);
-            rabbitTemplate.convertAndSend(RabbitMQConfig.UPDATE_QUEUE, new Object[]{codass, isInvalid});
+            rabbitTemplate.convertAndSend(RabbitMQConfig.UPDATE_FANOUT_EXCHANGE,"" , new Object[]{codass, isInvalid});
             return isInvalid;
         }
     }

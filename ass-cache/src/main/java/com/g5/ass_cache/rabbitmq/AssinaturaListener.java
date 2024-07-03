@@ -19,7 +19,7 @@ public class AssinaturaListener {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    @RabbitListener(queues = RabbitMQConfig.REQUEST_QUEUE)
+    @RabbitListener(queues = "#{requestQueue.name}")
     public void handleRequest(long codass) {
         Boolean isInvalid = assinaturaCache.get(codass);
         if (isInvalid != null) {
@@ -28,7 +28,7 @@ public class AssinaturaListener {
         }
     }
 
-    @RabbitListener(queues = RabbitMQConfig.UPDATE_QUEUE)
+    @RabbitListener(queues = "#{updateQueue.name}")
     public void handleUpdate(Object[] assinaturaStatus) {
         Long codass = (Long) assinaturaStatus[0];
         Boolean isInvalid = (Boolean) assinaturaStatus[1];
@@ -37,7 +37,7 @@ public class AssinaturaListener {
         System.out.println("codass: " + codass + ", valor: " + assinaturaCache.get(codass));
     }
 
-    @RabbitListener(queues = RabbitMQConfig.DELETE_QUEUE)
+    @RabbitListener(queues = "#{deleteQueue.name}")
     public void handleDelete(Long codass) {
         System.out.println("pedido recebido");
         if (assinaturaCache.containsKey(codass)) {
